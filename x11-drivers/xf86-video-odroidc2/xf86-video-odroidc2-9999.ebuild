@@ -9,7 +9,7 @@ inherit autotools-utils xorg-2 git-r3
 EGIT_REPO_URI="https://github.com/mdrjr/c2_mali_ddx.git"
 SRC_URI=""
 
-DESCRIPTION="X.org Mali video driver for ODROID-C1"
+DESCRIPTION="X.org Mali video driver for ODROID-C2"
 HOMEPAGE="http://www.hardkernel.com/"
 
 KEYWORDS=""

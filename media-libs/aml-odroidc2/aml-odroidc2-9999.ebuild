@@ -25,54 +25,35 @@ src_compile() {
 }
 
 src_install() {
-	AML_LIBS_DIR="/usr/lib64/aml_libs"
-
-	dodir "/usr/include" "/lib/firmware" "${AML_LIBS_DIR}" "/etc/ld.so.conf.d"
+	dodir "/usr/include" "/lib/firmware" "/etc/ld.so.conf.d"
 
 	# amadec
-	insinto "${AML_LIBS_DIR}"
-	doins amadec/libamadec.so
+	dolib.so amadec/libamadec.so
 
 	doheader amadec/include/*
 	doheader amadec/*.h
 
-	insinto  /lib/firmware
+	insinto /lib/firmware
+	insopts -m644
 	doins amadec/firmware/*.bin
 
 
 	# amavutils
-	insinto "${AML_LIBS_DIR}"
-	doins amavutils/libamavutils.so
+	dolib.so amavutils/libamavutils.so
 
 	doheader amavutils/include/*
 
 	# amcodec
-	insinto "${AML_LIBS_DIR}"
-	doins amcodec/libamcodec.so
+	dolib.so amcodec/libamcodec.so
 
 	dodir "/usr/include/amcodec"
 	insinto /usr/include/amcodec
 	doins amcodec/include/*
-
-	# audio_codec
-		# libadpcm
-		# libamr
-		# libape
-		# libcoock
-		# libfaad
-		# libflac
-		# libpcm
-		# libmad
-		# libpcm
-		# libraac
-
 
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/99-amlogic.rules
 
 	insinto /etc/ld.so.conf.d
 	doins "${FILESDIR}"/aml.conf
-
-	dosym "${AML_LIBS_DIR}" /usr/lib/aml_libs
 
 }
