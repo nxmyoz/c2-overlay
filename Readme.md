@@ -12,10 +12,11 @@ WIP:
 * `x11-libs/odroidc2-mali`: ARM closed source Mali drivers (https://github.com/hardkernel/mdrjr/c2_mali
 
 U-Boot:
-ODROID-C2 is nasty here, native compiling on the C2 itslef won't work. At this moment compilation has to be on a x86-64 machine with according crossdev setup.
-* https://github.com/hardkernel/u-boot/issues/23
 
-A workaround via binfmt will not work natively on Gentoo, because of https://bugs.gentoo.org/show_bug.cgi?id=484886.    
+ODROID-C2 is nasty here, native compiling on the C2 itslef won't work. At this moment compilation has to be on a x86-64 machine with according crossdev setup. (https://github.com/hardkernel/u-boot/issues/23)
+
+A workaround via binfmt will not work natively on Gentoo, because of https://bugs.gentoo.org/show_bug.cgi?id=484886.
+
 
 Layman
 -----------------
