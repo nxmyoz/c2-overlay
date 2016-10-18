@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repositories version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name>ODROID-C2</name>
+    <description>ODROID-C2 Overlay</description>
+    <homepage>https://github.com/nxmyoz/c2-overlay</homepage>
+    <owner>
+      <email>nxmyoz@gmail.com</email>
+      <name>NxMyOz</name>
+    </owner>
+    <source type="git">https://github.com/nxmyoz/c2-overlay.git</source>
+    <source type="git">git://github.com:nxmyoz/c2-overlay.git</source>
+    <source type="git">git@github.com:nxmyoz/c2-overlay.git</source>
+  </repo>
+</repositories>
