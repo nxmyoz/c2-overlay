@@ -28,9 +28,13 @@ src_compile() {
 
 src_install() {
 	dodir "/usr/include" "/lib/firmware" "/etc/ld.so.conf.d"
+	dodir "/usr/lib/aml_libs"
+	dodir "/usr/lib64/aml_libs"
 
 	# amadec
 	dolib.so amadec/libamadec.so
+	dosym libamadec.so /usr/lib/aml_libs/libamadec.so
+	dosym libamadec.so /usr/lib64/aml_libs/libamadec.so
 
 	doheader amadec/include/*
 	doheader amadec/*.h
@@ -42,11 +46,15 @@ src_install() {
 
 	# amavutils
 	dolib.so amavutils/libamavutils.so
+	dosym libamavutils.so /usr/lib/aml_libs/libamavutils.so
+	dosym libamavutils.so /usr/lib64/aml_libs/libamavutils.so
 
 	doheader amavutils/include/*
 
 	# amcodec
 	dolib.so amcodec/libamcodec.so
+	dosym libamcodec.so /usr/lib/aml_libs/libamcodec.so
+	dosym libamcodec.so /usr/lib64/aml_libs/libamcodec.so
 
 	dodir "/usr/include/amcodec"
 	insinto /usr/include/amcodec
