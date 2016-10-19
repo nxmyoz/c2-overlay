@@ -20,7 +20,7 @@ src_compile() {
 	emake -C amadec
 	emake -C amavutils
 	emake -C amcodec
-	emake -C example
+	#emake -C example
 	emake -C audio_codec all
 }
 
@@ -63,7 +63,7 @@ src_install() {
 	dolib.so audio_codec/libraac/libraac.so
 
 	# example player
-	dobin example/esplayer
+	#dobin example/esplayer
 
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/99-amlogic.rules
