@@ -70,7 +70,8 @@ src_install() {
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/99-amlogic.rules
 
-	insinto /etc/ld.so.conf.d
-	doins "${FILESDIR}"/aml.conf
+	# since we install to th elibdir directly, no need for additional conf file for ld
+	#insinto /etc/ld.so.conf.d
+	#doins "${FILESDIR}"/aml.conf
 
 }
