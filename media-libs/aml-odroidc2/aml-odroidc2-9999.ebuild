@@ -20,8 +20,8 @@ src_compile() {
 	emake -C amadec
 	emake -C amavutils
 	emake -C amcodec
-	#emake -C example
-	#emake -C audio_codec all
+	emake -C example
+	emake -C audio_codec all
 }
 
 src_install() {
@@ -49,6 +49,21 @@ src_install() {
 	dodir "/usr/include/amcodec"
 	insinto /usr/include/amcodec
 	doins amcodec/include/*
+
+	# audio_codec
+	dolib.so audio_codec/libadpcm/libadpcm.so
+	dolib.so audio_codec/libamr/libamr.so
+	dolib.so audio_codec/libape/libape.so
+	dolib.so audio_codec/libcook/libcook.so
+	dolib.so audio_codec/libfaad/libfaad.so
+	dolib.so audio_codec/libflac/libflac.so
+	dolib.so audio_codec/liblpcm/libpcm_wfd.so
+	dolib.so audio_codec/libmad/libmad.so
+	dolib.so audio_codec/libpcm/libpcm.so
+	dolib.so audio_codec/libraac/libraac.so
+
+	# example player
+	dobin example/esplayer
 
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/99-amlogic.rules
