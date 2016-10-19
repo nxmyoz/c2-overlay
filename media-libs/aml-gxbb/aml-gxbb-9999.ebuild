@@ -13,6 +13,7 @@ HOMEPAGE="https://github.com/mdrjr/c2_aml_libs.git"
 LICENSE="all-rights-reserved"
 
 SLOT="0"
+KEYWORDS="~arm64"
 
 RDEPEND="media-libs/alsa-lib"
 
