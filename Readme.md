@@ -23,5 +23,5 @@ Layman
 
 ```
 $ wget "https://raw.githubusercontent.com/nxmyoz/c2-overlay/master/overlays.xml" -O /etc/layman/overlays/odroidc2.xml
-$ layman -f -a odroidc2
+$ layman -f -a ODROID-C2
 ```
