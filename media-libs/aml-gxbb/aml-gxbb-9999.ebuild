@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit git-r3
+inherit git-r3 flag-o-matic
 
 EGIT_REPO_URI="git://github.com/mdrjr/c2_aml_libs.git"
 
@@ -18,6 +18,7 @@ KEYWORDS="~arm64"
 RDEPEND="media-libs/alsa-lib"
 
 src_compile() {
+	append-flags -Wno-error
 	emake -j1 -C amadec
 	emake -j1 -C amavutils
 	emake -j1 -C amcodec
