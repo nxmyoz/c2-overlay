@@ -57,7 +57,7 @@ src_install() {
 	dolib.so audio_codec/libcook/libcook.so
 	dolib.so audio_codec/libfaad/libfaad.so
 	dolib.so audio_codec/libflac/libflac.so
-	dolib.so audio_codec/liblpcm/libpcm_wfd.so
+	dolib.so audio_codec/liblpcm/liblibpcm_wfd.so
 	dolib.so audio_codec/libmad/libmad.so
 	dolib.so audio_codec/libpcm/libpcm.so
 	dolib.so audio_codec/libraac/libraac.so
