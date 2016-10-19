@@ -22,7 +22,7 @@ src_compile() {
 	emake -j1 -C amavutils
 	emake -j1 -C amcodec
 	#emake -j1 -C example
-	emake -j1 -C audio_codec all
+	#emake -j1 -C audio_codec all
 }
 
 src_install() {
@@ -52,16 +52,16 @@ src_install() {
 	doins amcodec/include/*
 
 	# audio_codec
-	dolib.so audio_codec/libadpcm/libadpcm.so
-	dolib.so audio_codec/libamr/libamr.so
-	dolib.so audio_codec/libape/libape.so
-	dolib.so audio_codec/libcook/libcook.so
-	dolib.so audio_codec/libfaad/libfaad.so
-	dolib.so audio_codec/libflac/libflac.so
-	dolib.so audio_codec/liblpcm/liblibpcm_wfd.so
-	dolib.so audio_codec/libmad/libmad.so
-	dolib.so audio_codec/libpcm/libpcm.so
-	dolib.so audio_codec/libraac/libraac.so
+	#dolib.so audio_codec/libadpcm/libadpcm.so
+	#dolib.so audio_codec/libamr/libamr.so
+	#dolib.so audio_codec/libape/libape.so
+	#dolib.so audio_codec/libcook/libcook.so
+	#dolib.so audio_codec/libfaad/libfaad.so
+	#dolib.so audio_codec/libflac/libflac.so
+	#dolib.so audio_codec/liblpcm/liblibpcm_wfd.so
+	#dolib.so audio_codec/libmad/libmad.so
+	#dolib.so audio_codec/libpcm/libpcm.so
+	#dolib.so audio_codec/libraac/libraac.so
 
 	# example player
 	#dobin example/esplayer
