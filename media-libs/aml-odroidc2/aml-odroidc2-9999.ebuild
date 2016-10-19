@@ -17,8 +17,6 @@ SLOT="0"
 RDEPEND="media-libs/alsa-lib"
 
 src_compile() {
-	append-flags "-Wno-implicit-function-declaration"
-
 	emake -j1 -C amadec
 	emake -j1 -C amavutils
 	emake -j1 -C amcodec
