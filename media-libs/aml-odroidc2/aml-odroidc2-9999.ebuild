@@ -17,11 +17,11 @@ SLOT="0"
 RDEPEND="media-libs/alsa-lib"
 
 src_compile() {
-	emake -C amadec
-	emake -C amavutils
-	emake -C amcodec
-	#emake -C example
-	emake -C audio_codec all
+	emake -j1 -C amadec
+	emake -j1 -C amavutils
+	emake -j1 -C amcodec
+	#emake -j1 -C example
+	emake -j1 -C audio_codec all
 }
 
 src_install() {
