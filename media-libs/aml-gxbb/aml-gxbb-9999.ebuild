@@ -17,6 +17,12 @@ KEYWORDS="~arm64"
 
 RDEPEND="media-libs/alsa-lib"
 
+src_prepare() {
+	rm -f amadec/*.so
+	rm -f amavutils/*.so
+	rm -f amcodec/*.so
+}
+
 src_compile() {
 	append-flags -w
 	emake -j1 -C amadec all
