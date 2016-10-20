@@ -26,7 +26,9 @@ src_prepare() {
 }
 
 src_compile() {
-	emake clean
+	emake -C amadec clean
+	emake -C amavutils clean
+	emake -C amcodec clean
 
 	append-flags -w
 	emake -j1 -C amadec
