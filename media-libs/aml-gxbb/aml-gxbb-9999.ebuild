@@ -29,11 +29,11 @@ src_compile() {
 src_install() {
 	dodir "/usr/include" "/lib/firmware" "/etc/ld.so.conf.d"
 
-	dodir "/usr/lib64/aml_libs"
-	dosym /usr/lib64/aml_libs /usr/lib/aml_libs
+	#dodir "/usr/lib64/aml_libs"
+	#dosym /usr/lib64/aml_libs /usr/lib/aml_libs
 
 	# amadec
-	into /usr/lib64/aml_libs
+	#into /usr/lib64/aml_libs
 	dolib.so amadec/libamadec.so
 
 	doheader amadec/include/*
@@ -45,7 +45,7 @@ src_install() {
 
 
 	# amavutils
-	into /usr/lib64/aml_libs
+	#into /usr/lib64/aml_libs
 	dolib.so amavutils/libamavutils.so
 
 	doheader amavutils/include/*
@@ -55,33 +55,24 @@ src_install() {
 	#doins amavutils/include/cutils/* /usr/include/cutils
 
 	# amcodec
-	into /usr/lib64/aml_libs
+	#into /usr/lib64/aml_libs
 	dolib.so amcodec/libamcodec.so
 
 	dodir "/usr/include/amcodec"
 	insinto /usr/include/amcodec
+	insopts -r
 	doins amcodec/include/*
 
 	# audio_codec
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libadpcm/libadpcm.so
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libamr/libamr.so
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libape/libape.so
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libcook/libcook.so
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libfaad/libfaad.so
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libflac/libflac.so
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/liblpcm/liblibpcm_wfd.so
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libmad/libmad.so
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libpcm/libpcm.so
-	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libraac/libraac.so
 
 	# example player
