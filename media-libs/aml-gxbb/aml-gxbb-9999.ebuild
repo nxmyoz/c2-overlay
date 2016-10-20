@@ -35,6 +35,8 @@ src_compile() {
 }
 
 src_install() {
+	default
+
 	dodir "/usr/include" "/lib/firmware" "/etc/ld.so.conf.d"
 
 	#dodir "/usr/lib64/aml_libs"
