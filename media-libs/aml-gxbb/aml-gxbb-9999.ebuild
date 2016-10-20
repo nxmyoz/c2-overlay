@@ -49,6 +49,10 @@ src_install() {
 	dosym /usr/lib64/libamavutils.so /usr/lib64/aml_libs/libamavutils.so
 
 	doheader amavutils/include/*
+	doheader amavutils/include/cutils/*
+	#dodir "/usr/include/cutils"
+	#insinto /usr/include/cutils
+	#doins amavutils/include/cutils/* /usr/include/cutils
 
 	# amcodec
 	dolib.so amcodec/libamcodec.so
