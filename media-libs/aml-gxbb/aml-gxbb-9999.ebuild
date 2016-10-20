@@ -33,8 +33,8 @@ src_install() {
 
 	# amadec
 	dolib.so amadec/libamadec.so
-	dosym libamadec.so /usr/lib/aml_libs/libamadec.so
-	dosym libamadec.so /usr/lib64/aml_libs/libamadec.so
+	dosym /usr/lib/aml_libs/libamadec.so libamadec.so
+	dosym /usr/lib64/aml_libs/libamadec.so libamadec.so
 
 	doheader amadec/include/*
 	doheader amadec/*.h
@@ -46,15 +46,15 @@ src_install() {
 
 	# amavutils
 	dolib.so amavutils/libamavutils.so
-	dosym libamavutils.so /usr/lib/aml_libs/libamavutils.so
-	dosym libamavutils.so /usr/lib64/aml_libs/libamavutils.so
+	dosym /usr/lib/aml_libs/libamavutils.so libamavutils.so
+	dosym /usr/lib64/aml_libs/libamavutils.so libamavutils.so
 
 	doheader amavutils/include/*
 
 	# amcodec
 	dolib.so amcodec/libamcodec.so
-	dosym libamcodec.so /usr/lib/aml_libs/libamcodec.so
-	dosym libamcodec.so /usr/lib64/aml_libs/libamcodec.so
+	dosym /usr/lib/aml_libs/libamcodec.so libamcodec.so
+	dosym /usr/lib64/aml_libs/libamcodec.so libamcodec.so
 
 	dodir "/usr/include/amcodec"
 	insinto /usr/include/amcodec
