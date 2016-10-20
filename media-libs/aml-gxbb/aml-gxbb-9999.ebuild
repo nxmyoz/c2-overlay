@@ -19,9 +19,9 @@ RDEPEND="media-libs/alsa-lib"
 
 src_compile() {
 	append-flags -w
-	emake -j1 -C amadec
-	emake -j1 -C amavutils
-	emake -j1 -C amcodec
+	emake -j1 -C amadec all
+	emake -j1 -C amavutils all
+	emake -j1 -C amcodec all
 	#emake -j1 -C example
 	#emake -j1 -C audio_codec all
 }
@@ -33,8 +33,8 @@ src_install() {
 	dosym /usr/lib64/aml_libs /usr/lib/aml_libs
 
 	# amadec
+	into /usr/lib64/aml_libs
 	dolib.so amadec/libamadec.so
-	dosym /usr/lib64/libamadec.so /usr/lib64/aml_libs/libamadec.so
 
 	doheader amadec/include/*
 	doheader amadec/*.h
@@ -45,8 +45,8 @@ src_install() {
 
 
 	# amavutils
+	into /usr/lib64/aml_libs
 	dolib.so amavutils/libamavutils.so
-	dosym /usr/lib64/libamavutils.so /usr/lib64/aml_libs/libamavutils.so
 
 	doheader amavutils/include/*
 	doheader amavutils/include/cutils/*
@@ -55,23 +55,33 @@ src_install() {
 	#doins amavutils/include/cutils/* /usr/include/cutils
 
 	# amcodec
+	into /usr/lib64/aml_libs
 	dolib.so amcodec/libamcodec.so
-	dosym /usr/lib64/libamcodec.so /usr/lib64/aml_libs/libamcodec.so
 
 	dodir "/usr/include/amcodec"
 	insinto /usr/include/amcodec
 	doins amcodec/include/*
 
 	# audio_codec
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libadpcm/libadpcm.so
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libamr/libamr.so
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libape/libape.so
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libcook/libcook.so
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libfaad/libfaad.so
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libflac/libflac.so
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/liblpcm/liblibpcm_wfd.so
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libmad/libmad.so
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libpcm/libpcm.so
+	#into /usr/lib64/aml_libs
 	#dolib.so audio_codec/libraac/libraac.so
 
 	# example player
