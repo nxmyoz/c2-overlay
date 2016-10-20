@@ -8,7 +8,7 @@ inherit git-r3 flag-o-matic
 
 EGIT_REPO_URI="git://github.com/mdrjr/c2_aml_libs.git"
 
-DESCRIPTION="ODROID-C2 Amlogic Libraries"
+DESCRIPTION="Amlogic VPU Libraries for ODROID-C2 (S905), e.g. meson-gxbb"
 HOMEPAGE="https://github.com/mdrjr/c2_aml_libs.git"
 LICENSE="all-rights-reserved"
 
@@ -29,7 +29,7 @@ src_compile() {
 	append-flags -w
 	append-ldflags -Wl,-soname,libamadec.so
 	emake -j1 -C amadec
-	append-ldflags -Wl,-soname,libamvutils.so
+	append-ldflags -Wl,-soname,libamavutils.so
 	emake -j1 -C amavutils
 
 	emake -j1 -C amcodec
