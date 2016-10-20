@@ -26,12 +26,14 @@ src_prepare() {
 }
 
 src_compile() {
-	emake -C amadec clean
-	emake -C amavutils clean
-	emake -C amcodec clean
+	emake -j1 -C amadec clean
+	emake -j1 -C amavutils clean
+	emake -j1 -C amcodec clean
 
 	append-flags -w
+	append-ldflags -Wl,-soname,libamadec.so
 	emake -j1 -C amadec
+	append-ldflags -Wl,-soname,libavutils.so
 	emake -j1 -C amavutils
 	emake -j1 -C amcodec
 	#emake -j1 -C example
