@@ -18,7 +18,7 @@ KEYWORDS="~arm64"
 RDEPEND="media-libs/alsa-lib"
 
 src_prepare() {
-	epatch_user
+	default
 
 	rm -f amadec/*.so
 	rm -f amavutils/*.so
