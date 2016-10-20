@@ -26,16 +26,14 @@ src_prepare() {
 }
 
 src_compile() {
-	emake -j1 -C amadec clean
-	emake -j1 -C amavutils clean
-	emake -j1 -C amcodec clean
-
 	append-flags -w
 	append-ldflags -Wl,-soname,libamadec.so
 	emake -j1 -C amadec
-	append-ldflags -Wl,-soname,libavutils.so
+	append-ldflags -Wl,-soname,libamvutils.so
 	emake -j1 -C amavutils
+
 	emake -j1 -C amcodec
+
 	#emake -j1 -C example
 	#emake -j1 -C audio_codec all
 }
@@ -47,7 +45,6 @@ src_install() {
 	#dosym /usr/lib64/aml_libs /usr/lib/aml_libs
 
 	# amadec
-	#into /usr/lib64/aml_libs
 	dolib.so amadec/libamadec.so
 
 	doheader amadec/include/*
@@ -59,17 +56,12 @@ src_install() {
 
 
 	# amavutils
-	#into /usr/lib64/aml_libs
 	dolib.so amavutils/libamavutils.so
 
 	doheader amavutils/include/*
 	doheader amavutils/include/cutils/*
-	#dodir "/usr/include/cutils"
-	#insinto /usr/include/cutils
-	#doins amavutils/include/cutils/* /usr/include/cutils
 
 	# amcodec
-	#into /usr/lib64/aml_libs
 	dolib.so amcodec/libamcodec.so
 
 	dodir "/usr/include/amcodec"
@@ -97,5 +89,4 @@ src_install() {
 	# since we install to th elibdir directly, no need for additional conf file for ld
 	#insinto /etc/ld.so.conf.d
 	#doins "${FILESDIR}"/aml.conf
-
 }
