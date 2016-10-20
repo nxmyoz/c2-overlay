@@ -26,6 +26,8 @@ src_prepare() {
 }
 
 src_compile() {
+	emake clean
+
 	append-flags -w
 	emake -j1 -C amadec
 	emake -j1 -C amavutils
@@ -35,8 +37,6 @@ src_compile() {
 }
 
 src_install() {
-	default
-
 	dodir "/usr/include" "/lib/firmware" "/etc/ld.so.conf.d"
 
 	#dodir "/usr/lib64/aml_libs"
