@@ -27,9 +27,9 @@ src_prepare() {
 
 src_compile() {
 	append-flags -w
-	emake -j1 -C amadec all
-	emake -j1 -C amavutils all
-	emake -j1 -C amcodec all
+	emake -j1 -C amadec
+	emake -j1 -C amavutils
+	emake -j1 -C amcodec
 	#emake -j1 -C example
 	#emake -j1 -C audio_codec all
 }
