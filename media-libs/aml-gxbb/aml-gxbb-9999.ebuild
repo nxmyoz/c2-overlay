@@ -18,7 +18,7 @@ KEYWORDS="~arm64"
 RDEPEND="media-libs/alsa-lib"
 
 src_compile() {
-	append-flags -Wno-error
+	append-flags -Wno-implicit
 	emake -j1 -C amadec
 	emake -j1 -C amavutils
 	emake -j1 -C amcodec
