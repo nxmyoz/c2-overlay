@@ -60,8 +60,7 @@ src_install() {
 
 	dodir "/usr/include/amcodec"
 	insinto /usr/include/amcodec
-	insopts -r
-	doins amcodec/include/*
+	doins -r amcodec/include/*
 
 	# audio_codec
 	#dolib.so audio_codec/libadpcm/libadpcm.so
