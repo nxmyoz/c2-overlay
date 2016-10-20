@@ -18,6 +18,8 @@ KEYWORDS="~arm64"
 RDEPEND="media-libs/alsa-lib"
 
 src_prepare() {
+	true;
+
 	rm -f amadec/*.so
 	rm -f amavutils/*.so
 	rm -f amcodec/*.so
