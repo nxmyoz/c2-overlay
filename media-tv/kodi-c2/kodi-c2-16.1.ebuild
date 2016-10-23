@@ -133,7 +133,7 @@ DEPEND="${COMMON_DEPEND}
 	test? ( dev-cpp/gtest )
 	texturepacker? ( media-libs/giflib )
 	virtual/pkgconfig
-	X? ( media-libs/odroidc2-mali[X] )
+	X? ( media-libs/odroidc2-mali[x11] )
 	media-libs/aml-gxbb
 	fbdev? ( media-libs/odroidc2-mali[fbdev] )"
 # Force java for latest git version to avoid having to hand maintain the

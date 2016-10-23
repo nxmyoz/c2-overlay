@@ -19,8 +19,8 @@ DEPEND=">=app-eselect/eselect-opengl-1.2.6"
 RDEPEND="${DEPEND}
 	media-libs/mesa[gles1,gles2]"
 
-IUSE="+fbdev -X"
-REQUIRED_USE="^^ ( fbdev X )"
+IUSE="+fbdev -x11"
+REQUIRED_USE="^^ ( fbdev x11 )"
 
 
 src_compile() {
@@ -35,7 +35,7 @@ src_install() {
 
 	insinto ${opengl_dir}/include
 
-	if use X ; then
+	if use x11 ; then
 		doins -r x11/mali_headers/*
 	fi
 
@@ -44,7 +44,7 @@ src_install() {
 	fi
 
 	# create symlink to libMali and libUMP into /usr/lib
-	if use X ; then
+	if use x11 ; then
 		dolib.so x11/mali_libs/libUMP.so
 		dolib.so x11/mali_libs/libMali.so
 		dosym "/usr/$(get_libdir)/libUMP.so" "${opengl_dir}/lib/libUMP.so"
