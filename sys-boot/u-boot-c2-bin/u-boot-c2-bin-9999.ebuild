@@ -19,9 +19,12 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
+src_compile() {
+}
+
 src_install() {
 	dodir "/usr/share/${PN}"
-	insinto /usr/share${PN}
+	insinto /usr/share/${PN}
 	doins bl1.bin.hardkernel
 	doins u-boot.bin
 	doins sd_fusing.sh
