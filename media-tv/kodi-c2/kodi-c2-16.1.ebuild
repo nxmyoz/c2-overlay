@@ -136,7 +136,7 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 	X? ( media-libs/odroidc2-mali[x11] )
 	media-libs/aml-gxbb
-	fbdev? ( media-libs/odroidc2-mali[fbdev]"
+	fbdev? ( media-libs/odroidc2-mali[fbdev] )"
 # Force java for latest git version to avoid having to hand maintain the
 # generated addons package.  #488118
 [[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
@@ -254,6 +254,34 @@ src_configure() {
 			--disable-vtbdecoder \
 			--enable-codec=amcodec
 	fi
+
+	if use X ; then
+		econf \
+			--docdir=/usr/share/doc/${PF} \
+			--disable-gl \
+			--enable-gles \
+			--disable-sdl \
+			--enable-optimizations \
+			--disable-goom \
+			--disable-xrandr \
+			--disable-mid \
+			--enable-nfs \
+			--disable-profiling \
+			--enable-rsxs \
+			--disable-debug \
+			--disable-joystick \
+			--disable-vaapi \
+			--disable-vdpau \
+			--disable-avahi \
+			--enable-libcec \
+			--enable-pulse \
+			--disable-projectm \
+			--disable-optical-drive \
+			--disable-dvdcss \
+			--disable-vtbdecoder \
+			--enable-codec=amcodec
+	fi
+
 }
 
 src_compile() {
