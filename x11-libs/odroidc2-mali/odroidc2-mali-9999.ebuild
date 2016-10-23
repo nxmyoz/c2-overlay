@@ -8,7 +8,7 @@ inherit git-r3
 
 EGIT_REPO_URI="git://github.com/mdrjr/c2_mali.git"
 
-DESCRIPTION="Closed source drivers for Mali-400 ODROID-C2"
+DESCRIPTION="Closed source drivers for Mali-450 ODROID-C2"
 HOMEPAGE="https://github.com/mdrjr/c2_mali.git"
 LICENSE="all-rights-reserved"
 
@@ -19,9 +19,9 @@ DEPEND=">=app-eselect/eselect-opengl-1.2.6"
 RDEPEND="${DEPEND}
 	media-libs/mesa[gles1,gles2]"
 
-src_prepare() {
-	epatch "${FILESDIR}/0001-Fix-Makefiles.patch"
-}
+#src_prepare() {
+#	epatch "${FILESDIR}/0001-Fix-Makefiles.patch"
+#}
 
 src_compile() {
 	touch .gles-only
