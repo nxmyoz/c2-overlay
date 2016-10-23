@@ -37,29 +37,32 @@ src_install() {
 	dolib.so x11/mali_libs/libMali.so
 	dolib.so x11/mali_libs/libUMP.so
 
-	dodir "/usr/include/EGL"
-	insinto /usr/include/EGL
-	doins -r x11/mali_headers/EGL/* /usr/include/EGL
+	#dodir "/usr/include/EGL"
+	#insinto /usr/include/EGL
+	#doins -r x11/mali_headers/EGL/* /usr/include/EGL
 
-	dodir "/usr/include/GLES"
-	insinto /usr/include/GLES
-	doins -r x11/mali_headers/GLES/* /usr/include/GLES
+	#dodir "/usr/include/GLES"
+	#insinto /usr/include/GLES
+	#doins -r x11/mali_headers/GLES/* /usr/include/GLES
 
-	dodir "/usr/include/GLES2/"
-	insinto /usr/include/GLES2
-	doins -r x11/mali_headers/GLES2/* /usr/include/GLES2
+	#dodir "/usr/include/GLES2/"
+	#insinto /usr/include/GLES2
+	#doins -r x11/mali_headers/GLES2/* /usr/include/GLES2
 
-	dodir "/usr/include/KHR"
-	insinto /usr/include/KHR
-	doins -r x11/mali_headers/KHR/* /usr/include/KHR
+	#dodir "/usr/include/KHR"
+	#insinto /usr/include/KHR
+	#doins -r x11/mali_headers/KHR/* /usr/include/KHR
 
-	dodir "/usr/include/ump"
-	insinto /usr/include/ump
-	doins -r x11/mali_headers/ump/* /usr/include/ump
+	#dodir "/usr/include/ump"
+	#insinto /usr/include/ump
+	#doins -r x11/mali_headers/ump/* /usr/include/ump
 
-	dodir "/usr/include/umplock"
-	insinto /usr/include/umplock
-	doins -r x11/mali_headers/umplock/* /usr/include/umplock
+	#dodir "/usr/include/umplock"
+	#insinto /usr/include/umplock
+	#doins -r x11/mali_headers/umplock/* /usr/include/umplock
+
+	insinto /usr/include
+	doins -r x11/mali_headers/*
 
 	# create symlink to libMali and libUMP into /usr/lib
 	dosym "opengl/${opengl_imp}/lib/libMali.so" "/usr/$(get_libdir)/libMali.so"
