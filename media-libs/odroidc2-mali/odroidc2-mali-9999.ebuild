@@ -19,6 +19,8 @@ DEPEND=">=app-eselect/eselect-opengl-1.2.6"
 RDEPEND="${DEPEND}
 	media-libs/mesa[gles1,gles2]"
 
+IUSE="fbdev +x11"
+
 src_compile() {
 	touch .gles-only
 }
@@ -30,13 +32,29 @@ src_install() {
 	dodir "${opengl_dir}/lib" "${opengl_dir}/include" "${opengl_dir}/extensions"
 
 	insinto ${opengl_dir}/include
-	doins -r x11/mali_headers/*
+
+	if use x11 ; then
+		doins -r x11/mali_headers/*
+	fi
+
+	if use fbdev ; then
+		doins -r fbdev/mali_headers/*
+	fi
 
 	# create symlink to libMali and libUMP into /usr/lib
-	dolib.so x11/mali_libs/libUMP.so
-	dolib.so x11/mali_libs/libMali.so
+	if use x11 ; then
+		dolib.so x11/mali_libs/libUMP.so
+		dolib.so x11/mali_libs/libMali.so
+		dosym "/usr/$(get_libdir)/libUMP.so" "${opengl_dir}/lib/libUMP.so"
+		dosym "${D}/${opengl_dir}/include/ump" "/usr/includes/ump"
+		dosym "${D}/${opengl_dir}/include/umplock" "/usr/includes/umplock"
+	fi
+
+	if use fbdev ; then
+		dolib.so fbdev/mali_libs/libMali.so
+	fi
+
 	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libMali.so"
-	dosym "/usr/$(get_libdir)/libUMP.so" "${opengl_dir}/lib/libUMP.so"
 	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libEGL.so" 
 	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libEGL.so.1" 
 	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libEGL.so.1.4"
@@ -47,9 +65,6 @@ src_install() {
 	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libGLESv2.so.2"
 	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libGLESv2.so.2.0"
 
-
-	dosym "${D}/${opengl_dir}/include/ump" "/usr/includes/ump"
-	dosym "${D}/${opengl_dir}/include/umplock" "/usr/includes/umplock"
 
 	# udev rules to get the right ownership/permission for /dev/ump and /dev/mali
 	insinto /lib/udev/rules.d
