@@ -46,8 +46,8 @@ src_install() {
 		dolib.so x11/mali_libs/libUMP.so
 		dolib.so x11/mali_libs/libMali.so
 		dosym "/usr/$(get_libdir)/libUMP.so" "${opengl_dir}/lib/libUMP.so"
-		dosym "${D}/${opengl_dir}/include/ump" "/usr/includes/ump"
-		dosym "${D}/${opengl_dir}/include/umplock" "/usr/includes/umplock"
+		dosym "${D}/${opengl_dir}/include/ump" "/usr/include/ump"
+		dosym "${D}/${opengl_dir}/include/umplock" "/usr/include/umplock"
 	fi
 
 	if use fbdev ; then
