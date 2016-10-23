@@ -24,6 +24,10 @@ DEPEND="${RDEPEND}
 
 	#PATCHES=( "${FILESDIR}/0001-Fix-DESTDIR-when-performing-install.patch" )
 
+src_prepare() {
+	emake distclean
+}
+
 src_compile() {
 	autotools-utils_src_compile
 	cp "./src/xorg.conf" "${BUILD_DIR}/src/xorg.conf"
