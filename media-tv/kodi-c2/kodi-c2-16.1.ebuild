@@ -19,12 +19,12 @@ case ${PV} in
 	;;
 *|*_p*)
 	MY_PV=${PV/_p/_r}
-	MY_P="kodi-${MY_PV}"
-	SRC_URI="http://mirrors.kodi.tv/releases/source/${MY_PV}-${CODENAME}.tar.gz -> ${P}.tar.gz
-		https://github.com/xbmc/xbmc/archive/${PV}-${CODENAME}.tar.gz -> ${P}.tar.gz
+	MY_P="kodi-${P}"
+	SRC_URI="http://mirrors.kodi.tv/releases/source/${P}-${CODENAME}.tar.gz -> ${P}.tar.gz
+		https://github.com/xbmc/xbmc/archive/${P}-${CODENAME}.tar.gz -> ${P}.tar.gz
 		!java? ( mirror://sabayon/media-tv/${MY_P}-generated-addons.tar.xz )"
 	KEYWORDS="~arm64"
-	S=${WORKDIR}/xbmc-${PV}-${CODENAME}
+	S=${WORKDIR}/xbmc-${P}-${CODENAME}
 	;;
 esac
 
