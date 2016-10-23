@@ -29,7 +29,9 @@ src_install() {
 
 	dodir "${opengl_dir}/lib" "${opengl_dir}/include" "${opengl_dir}/extensions"
 
+	into ${opengl_dir}/lib
 	dolib.so x11/mali_libs/libMali.so
+	into ${opengl_dir}/lib
 	dolib.so x11/mali_libs/libUMP.so
 
 	insinto ${opengl_dir}/include
