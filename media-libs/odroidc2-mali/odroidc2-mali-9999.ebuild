@@ -20,6 +20,8 @@ RDEPEND="${DEPEND}
 	media-libs/mesa[gles1,gles2]"
 
 IUSE="+fbdev -X"
+REQUIRED_USE="^^ ( fbdev X )"
+
 
 src_compile() {
 	touch .gles-only
