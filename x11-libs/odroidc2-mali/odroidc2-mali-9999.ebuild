@@ -29,20 +29,6 @@ src_install() {
 
 	dodir "${opengl_dir}/lib" "${opengl_dir}/include" "${opengl_dir}/extensions"
 
-	insinto ${opengl_dir}/lib
-	insopts -m555
-	doins x11/mali_libs/libEGL.so.1
-	doins x11/mali_libs/libGLESv1_CM.so
-	doins x11/mali_libs/libGLESv1_CM.so.1.1
-	doins x11/mali_libs/libGLESv2.so.2
-	doins x11/mali_libs/libMali.so
-	doins x11/mali_libs/libEGL.so
-	doins x11/mali_libs/libEGL.so.1.4
-	doins x11/mali_libs/libGLESv1_CM.so.1
-	doins x11/mali_libs/libGLESv2.so
-	doins x11/mali_libs/libGLESv2.so.2.0
-	doins x11/mali_libs/libUMP.so
-
 	insinto ${opengl_dir}/include
 	doins -r x11/mali_headers/*
 
@@ -51,6 +37,15 @@ src_install() {
 	dolib.so x11/mali_libs/libMali.so
 	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libMali.so"
 	dosym "/usr/$(get_libdir)/libUMP.so" "${opengl_dir}/lib/libUMP.so"
+	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libEGL.so" 
+	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libEGL.so.1" 
+	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libEGL.so.1.4"
+	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libGLESv1_CM.so"
+	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libGLESv1_CM.so.1"
+	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libGLESv1_CM.so.1.1"
+	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libGLESv2.so"
+	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libGLESv2.so.2"
+	dosym "/usr/$(get_libdir)/libMali.so" "${opengl_dir}/lib/libGLESv2.so.2.0"
 
 
 	dosym "${D}/${opengl_dir}/include/ump" "/usr/includes/ump"
