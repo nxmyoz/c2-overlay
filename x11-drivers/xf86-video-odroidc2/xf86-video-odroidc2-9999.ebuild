@@ -12,7 +12,7 @@ SRC_URI=""
 DESCRIPTION="X.org Mali video driver for ODROID-C2"
 HOMEPAGE="http://www.hardkernel.com/"
 
-KEYWORDS=""
+KEYWORDS="~arm64"
 SLOT=0
 
 RDEPEND="x11-base/xorg-server"
