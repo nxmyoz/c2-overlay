@@ -5,10 +5,7 @@ Status (done):
 
 * `media-libs/aml-odroidc2`: Odroid C2 Amlogic Libraries (https://github.com/mdrjr/c2_aml_libs)
 * `sys-kernel/odroidc2-sources`: Linux source for ODROID-C2 (https://github.com/hardkernel/linux)
-* `x11-libs/odroidc2-mali`: ARM closed source Mali drivers (https://github.com/hardkernel/mdrjr/c2_mali)
-
-WIP:
-
+* `media-libs/odroidc2-mali`: ARM closed source Mali drivers (https://github.com/hardkernel/mdrjr/c2_mali) (use flags: fbdev or x11)
 * `x11-drivers/xf86-video-odroidc2`: Xorg DDX driver for ODROID-C2 (https://github.com/hardkernel/mdrjr/c2_mali_ddx)
 * All things related to fbdev
 
