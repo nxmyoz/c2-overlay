@@ -34,8 +34,8 @@ src_install() {
 	dodir "${opengl_dir}/lib" "${opengl_dir}/include" "${opengl_dir}/extensions"
 
 	#emake "libdir=${D}/${opengl_dir}/lib" "includedir=${D}/${opengl_dir}/include" -C x11 install
-	dolib.so x11/media_libs/libMali.so
-	dolib.so x11/media_libs/libUMP.so
+	dolib.so x11/mali_libs/libMali.so
+	dolib.so x11/mali_libs/libUMP.so
 
 	dodir "/usr/include/EGL"
 	insinto /usr/include/EGL
