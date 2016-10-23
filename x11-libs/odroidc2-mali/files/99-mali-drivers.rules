@@ -1,0 +1,2 @@
+KERNEL=="mali",			GROUP="video"
+KERNEL=="ump",			GROUP="video"
