@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit autotools-utils xorg-2 git-r3
+inherit xorg-2 git-r3
 
 EGIT_REPO_URI="https://github.com/mdrjr/c2_mali_ddx.git"
 SRC_URI=""
