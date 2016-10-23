@@ -38,8 +38,8 @@ src_install() {
 	doins -r x11/mali_headers/*
 
 	# create symlink to libMali and libUMP into /usr/lib
-	dosym "opengl/${opengl_imp}/lib/libMali.so" "/usr/$(get_libdir)/libMali.so"
-	dosym "opengl/${opengl_imp}/lib/libUMP.so" "/usr/$(get_libdir)/libUMP.so"
+	dosym "/usr/$(get_libdir)/opengl/${opengl_imp}/lib/libMali.so" "/usr/$(get_libdir)/libMali.so"
+	dosym "/usr/$(get_libdir)/opengl/${opengl_imp}/lib/libUMP.so" "/usr/$(get_libdir)/libUMP.so"
 
 	dosym "${D}/${opengl_dir}/include/ump" "/usr/includes/ump"
 	dosym "${D}/${opengl_dir}/include/umplock" "/usr/includes/umplock"
