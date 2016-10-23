@@ -30,5 +30,6 @@ src_prepare() {
 
 src_compile() {
 	autotools-utils_src_compile
-	cp "./src/xorg.conf" "${BUILD_DIR}/src/xorg.conf"
+	#cp "./src/xorg.conf" "${BUILD_DIR}/src/xorg.conf"
 }
+
