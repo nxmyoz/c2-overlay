@@ -20,6 +20,7 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 src_compile() {
+	return
 }
 
 src_install() {
