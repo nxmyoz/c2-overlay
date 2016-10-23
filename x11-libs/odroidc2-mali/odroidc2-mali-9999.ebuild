@@ -61,7 +61,8 @@ src_install() {
 	#insinto /usr/include/umplock
 	#doins -r x11/mali_headers/umplock/* /usr/include/umplock
 
-	insinto /usr/include
+	dodir /usr/include/opengl/mali
+	insinto /usr/include/opengl/mali
 	doins -r x11/mali_headers/*
 
 	# create symlink to libMali and libUMP into /usr/lib
