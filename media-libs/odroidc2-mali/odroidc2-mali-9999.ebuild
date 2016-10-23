@@ -19,7 +19,7 @@ DEPEND=">=app-eselect/eselect-opengl-1.2.6"
 RDEPEND="${DEPEND}
 	media-libs/mesa[gles1,gles2]"
 
-IUSE="+fbdev X"
+IUSE="+fbdev -X"
 
 src_compile() {
 	touch .gles-only
