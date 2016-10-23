@@ -133,9 +133,9 @@ DEPEND="${COMMON_DEPEND}
 	test? ( dev-cpp/gtest )
 	texturepacker? ( media-libs/giflib )
 	virtual/pkgconfig
-	X? ( media-libs/odroidc2-mali[x11] )
+	X? ( media-libs/odroidc2-mali[x11,-fbdev] )
 	media-libs/aml-gxbb
-	fbdev? ( media-libs/odroidc2-mali[fbdev] )"
+	fbdev? ( media-libs/odroidc2-mali[fbdev,-x11] )"
 # Force java for latest git version to avoid having to hand maintain the
 # generated addons package.  #488118
 [[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
