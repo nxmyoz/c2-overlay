@@ -89,7 +89,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-sound/dcadec
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
-	media-video/omxplayer
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
 	nfs? ( net-fs/libnfs:= )
@@ -134,7 +133,7 @@ DEPEND="${COMMON_DEPEND}
 	test? ( dev-cpp/gtest )
 	texturepacker? ( media-libs/giflib )
 	virtual/pkgconfig
-	X? ( media-libs/odroidc2-mali[x11] )
+	X? ( media-libs/odroidc2-mali[X] )
 	media-libs/aml-gxbb
 	fbdev? ( media-libs/odroidc2-mali[fbdev] )"
 # Force java for latest git version to avoid having to hand maintain the

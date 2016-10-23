@@ -19,7 +19,7 @@ DEPEND=">=app-eselect/eselect-opengl-1.2.6"
 RDEPEND="${DEPEND}
 	media-libs/mesa[gles1,gles2]"
 
-IUSE="fbdev +x11"
+IUSE="+fbdev X"
 
 src_compile() {
 	touch .gles-only
@@ -42,7 +42,7 @@ src_install() {
 	fi
 
 	# create symlink to libMali and libUMP into /usr/lib
-	if use x11 ; then
+	if use X ; then
 		dolib.so x11/mali_libs/libUMP.so
 		dolib.so x11/mali_libs/libMali.so
 		dosym "/usr/$(get_libdir)/libUMP.so" "${opengl_dir}/lib/libUMP.so"
