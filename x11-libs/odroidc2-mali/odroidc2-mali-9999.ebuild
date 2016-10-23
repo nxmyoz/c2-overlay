@@ -31,7 +31,17 @@ src_install() {
 
 	insinto ${opengl_dir}/lib
 	insopts -m555
-	doins -r x11/mali_libs/*
+	doins x11/mali_libs/libEGL.so.1
+	doins x11/mali_libs/libGLESv1_CM.so
+	doins x11/mali_libs/libGLESv1_CM.so.1.1
+	doins x11/mali_libs/libGLESv2.so.2
+	doins x11/mali_libs/libMali.so
+	doins x11/mali_libs/libEGL.so
+	doins x11/mali_libs/libEGL.so.1.4
+	doins x11/mali_libs/libGLESv1_CM.so.1
+	doins x11/mali_libs/libGLESv2.so
+	doins x11/mali_libs/libGLESv2.so.2.0
+	doins x11/mali_libs/libUMP.so
 
 	insinto ${opengl_dir}/include
 	doins -r x11/mali_headers/*
