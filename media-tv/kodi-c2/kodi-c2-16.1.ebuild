@@ -9,7 +9,7 @@ EAPI="5"
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils linux-info python-single-r1 multiprocessing autotools systemd toolchain-funcs user
+inherit eutils linux-info python-single-r1 multiprocessing autotools systemd toolchain-funcs user flag-o-matic
 
 CODENAME="Jarvis"
 case ${PV} in
@@ -23,7 +23,7 @@ case ${PV} in
 	SRC_URI="http://mirrors.kodi.tv/releases/source/${MY_PV}-${CODENAME}.tar.gz -> ${P}.tar.gz
 		https://github.com/xbmc/xbmc/archive/${PV}-${CODENAME}.tar.gz -> ${P}.tar.gz
 		!java? ( mirror://sabayon/media-tv/${MY_P}-generated-addons.tar.xz )"
-	KEYWORDS="~arm"
+	KEYWORDS="~arm64"
 	S=${WORKDIR}/xbmc-${PV}-${CODENAME}
 	;;
 esac
@@ -226,6 +226,9 @@ src_configure() {
 	[[ ${PV} != "9999" ]] && export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
 
 	export gl_cv_func_gettimeofday_clobber=no
+
+	append-flags -I/usr/lib64/opengl/mali/include
+	append-ldflags -L/usr/lib64/opengl/mali/lib -L/usr/lib64/aml_libs
 
 	if use fbdev ; then
 		econf \
