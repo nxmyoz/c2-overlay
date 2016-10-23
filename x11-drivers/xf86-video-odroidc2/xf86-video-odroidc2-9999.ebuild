@@ -17,7 +17,7 @@ SLOT=0
 
 RDEPEND="x11-base/xorg-server"
 DEPEND="${RDEPEND}
-	x11-libs/odroidc2-mali
+	media-libs/odroidc2-mali[x11]
 	x11-proto/fontsproto
 	x11-proto/xproto
 	x11-libs/libdrm"
