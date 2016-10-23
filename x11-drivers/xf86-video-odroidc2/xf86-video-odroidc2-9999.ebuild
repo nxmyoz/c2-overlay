@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=5
 
-inherit xorg-2 git-r3
+inherit autotools-utils xorg-2 git-r3
 
 EGIT_REPO_URI="https://github.com/mdrjr/c2_mali_ddx.git"
 SRC_URI=""
@@ -24,7 +24,7 @@ DEPEND="${RDEPEND}
 
 	#PATCHES=( "${FILESDIR}/0001-Fix-DESTDIR-when-performing-install.patch" )
 
-#src_compile() {
-#	autotools-utils_src_compile
-#	cp "./src/xorg.conf" "${BUILD_DIR}/src/xorg.conf"
-#}
+src_compile() {
+	autotools-utils_src_compile
+	cp "./src/xorg.conf" "${BUILD_DIR}/src/xorg.conf"
+}
