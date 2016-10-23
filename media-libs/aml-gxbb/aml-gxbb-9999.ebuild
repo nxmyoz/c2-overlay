@@ -41,11 +41,11 @@ src_compile() {
 src_install() {
 	dodir "/usr/include" "/lib/firmware" "/etc/ld.so.conf.d"
 
-	#dodir "/usr/lib64/aml_libs"
-	#dosym /usr/lib64/aml_libs /usr/lib/aml_libs
+	dodir "/usr/lib64/aml_libs"
 
 	# amadec
 	dolib.so amadec/libamadec.so
+	dosym /usr/lib64/aml_libs/libamadec.so /usr/lib64/libamadec.so
 
 	doheader amadec/include/*
 	doheader amadec/*.h
@@ -57,31 +57,18 @@ src_install() {
 
 	# amavutils
 	dolib.so amavutils/libamavutils.so
+	dosym /usr/lib64/aml_libs/libamavutils.so /usr/lib64/libamavutils.so
 
 	doheader amavutils/include/*
 	doheader amavutils/include/cutils/*
 
 	# amcodec
 	dolib.so amcodec/libamcodec.so
+	dosym /usr/lib64/aml_libs/libamcodec.so /usr/lib64/libamcodec.so
 
 	dodir "/usr/include/amcodec"
 	insinto /usr/include/amcodec
 	doins -r amcodec/include/*
-
-	# audio_codec
-	#dolib.so audio_codec/libadpcm/libadpcm.so
-	#dolib.so audio_codec/libamr/libamr.so
-	#dolib.so audio_codec/libape/libape.so
-	#dolib.so audio_codec/libcook/libcook.so
-	#dolib.so audio_codec/libfaad/libfaad.so
-	#dolib.so audio_codec/libflac/libflac.so
-	#dolib.so audio_codec/liblpcm/liblibpcm_wfd.so
-	#dolib.so audio_codec/libmad/libmad.so
-	#dolib.so audio_codec/libpcm/libpcm.so
-	#dolib.so audio_codec/libraac/libraac.so
-
-	# example player
-	#dobin example/esplayer
 
 	insinto /lib/udev/rules.d
 	doins "${FILESDIR}"/99-amlogic.rules
