@@ -33,7 +33,7 @@ src_install() {
 
 	insinto ${opengl_dir}/include
 
-	if use x11 ; then
+	if use X ; then
 		doins -r x11/mali_headers/*
 	fi
 
