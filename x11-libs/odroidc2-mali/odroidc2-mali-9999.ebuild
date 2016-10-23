@@ -32,7 +32,7 @@ src_install() {
 	dolib.so x11/mali_libs/libMali.so
 	dolib.so x11/mali_libs/libUMP.so
 
-	insinto $(opengl_dir)/include
+	insinto ${opengl_dir}/include
 	doins -r x11/mali_headers/*
 
 	# create symlink to libMali and libUMP into /usr/lib
