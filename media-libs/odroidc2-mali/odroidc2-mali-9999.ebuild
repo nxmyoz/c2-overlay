@@ -41,11 +41,10 @@ src_install() {
 		insopts -m755
 		doins x11/mali_libs/libUMP.so
 		doins x11/mali_libs/libMali.so
-		dosym "${D}/${opengl_dir_x11}/include/ump" "/usr/include/ump"
-		dosym "${D}/${opengl_dir_x11}/include/umplock" "/usr/include/umplock"
+		dosym "${opengl_dir_x11}/include/ump" "/usr/include/ump"
+		dosym "${opengl_dir_x11}/include/umplock" "/usr/include/umplock"
 
 		local libMali_x11="${opengl_dir_x11}/lib/libMali.so"
-		#dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libMali.so"
 		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libEGL.so"
 		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libEGL.so.1"
 		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libEGL.so.1.4"
@@ -76,16 +75,15 @@ src_install() {
 		doins fbdev/mali_libs/libMali.so
 
 		local libMali_fbdev="${opengl_dir_fbdev}/lib/libMali.so"
-		#dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libMali.so"
-		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libEGL.so"
-		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libEGL.so.1"
-		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libEGL.so.1.4"
-		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libGLESv1_CM.so"
-		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libGLESv1_CM.so.1"
-		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libGLESv1_CM.so.1.1"
-		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libGLESv2.so"
-		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libGLESv2.so.2"
-		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libGLESv2.so.2.0"
+		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libEGL.so"
+		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libEGL.so.1"
+		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libEGL.so.1.4"
+		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv1_CM.so"
+		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv1_CM.so.1"
+		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv1_CM.so.1.1"
+		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv2.so"
+		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv2.so.2"
+		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv2.so.2.0"
 
 		insinto "${opengl_dir_fbdev}"
 		doins .gles-only
