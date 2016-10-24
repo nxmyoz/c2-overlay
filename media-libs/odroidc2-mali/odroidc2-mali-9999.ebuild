@@ -37,10 +37,10 @@ src_install() {
 		insinto ${opengl_dir_x11}/include
 		doins -r x11/mali_headers/*
 
-		DESTTREE="${opengl_dir_x11}"
-		dolib.so x11/mali_libs/libUMP.so
-		dolib.so x11/mali_libs/libMali.so
-		#dosym "/usr/$(get_libdir)/libUMP.so" "${opengl_dir}/lib/libUMP.so"
+		insinto "${opengl_dir_x11}/lib"
+		insopts -m755
+		doins x11/mali_libs/libUMP.so
+		doins x11/mali_libs/libMali.so
 		dosym "${D}/${opengl_dir_x11}/include/ump" "/usr/include/ump"
 		dosym "${D}/${opengl_dir_x11}/include/umplock" "/usr/include/umplock"
 
@@ -71,8 +71,9 @@ src_install() {
 		insinto ${opengl_dir_fbdev}/include
 		doins -r fbdev/mali_headers/*
 
-		DESTTREE="${opengl_dir_fbdev}"
-		dolib.so fbdev/mali_libs/libMali.so
+		insinto "${opengl_dir_fbdev}/lib"
+		insopts -m755
+		doins fbdev/mali_libs/libMali.so
 
 		local libMali_fbdev="${opengl_dir_fbdev}/lib/libMali.so"
 		#dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libMali.so"
@@ -86,7 +87,7 @@ src_install() {
 		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libGLESv2.so.2"
 		dosym "${libMali_fbdev}" "${opengl_dir_x11}/lib/libGLESv2.so.2.0"
 
-		insinto "${opengl_dir_x11}"
+		insinto "${opengl_dir_fbdev}"
 		doins .gles-only
 	fi
 
