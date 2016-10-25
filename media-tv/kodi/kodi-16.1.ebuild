@@ -8,20 +8,36 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils linux-info python-single-r1 multiprocessing autotools toolchain-funcs git-r3
+inherit eutils linux-info python-single-r1 multiprocessing autotools toolchain-funcs
 
 CODENAME="Jarvis"
-EGIT_REPO_URI="git://github.com/Owersun/xbmc.git"
-EGIT_COMMIT="cdb7704d1174395f399657fd3f562fe236516b9f"
-KEYWORDS="~arm64"
+case ${PV} in
+9999)
+	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
+	inherit git-r3
+	;;
+*)
+	MY_PV=${PV/_p/_r}
+	MY_PV=${MY_PV//_alpha/a}
+	MY_PV=${MY_PV//_beta/b}
+	MY_PV=${MY_PV//_rc/rc}
+	MY_P="${PN}-${MY_PV}"
+	SRC_URI="https://github.com/xbmc/xbmc/archive/${MY_PV}-${CODENAME}.tar.gz -> ${MY_P}.tar.gz
+		!java? ( https://github.com/candrews/gentoo-kodi/raw/master/${MY_P}-generated-addons.tar.xz )"
+	KEYWORDS="~amd64 ~x86"
 
+	S=${WORKDIR}/xbmc-${MY_PV}-${CODENAME}
+	;;
+esac
 
 DESCRIPTION="Kodi is a free and open source media-player and entertainment hub"
 HOMEPAGE="https://kodi.tv/ http://kodi.wiki/"
 
+KEYWORDS="~arm64"
+
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+gxbb airplay alsa bluetooth bluray caps cec css dbus debug gles java joystick midi mysql nfs opengl profile pulseaudio rtmp samba sftp test texturepacker udisks upnp upower +usb vaapi vdpau webserver +X zeroconf"
+IUSE="+gxbb airplay alsa bluetooth bluray caps cec css dbus debug +gles java joystick midi mysql nfs opengl profile pulseaudio rtmp samba sftp test texturepacker udisks upnp upower +usb vaapi vdpau webserver +X zeroconf"
 # gles/vaapi: http://trac.kodi.tv/ticket/10552 #464306
 REQUIRED_USE="
 	|| ( gles opengl )
@@ -130,6 +146,9 @@ DEPEND="${COMMON_DEPEND}
 [[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
 
 PATCHES=(
+	"${FILESDIR}"/${PN}-16.1-9703.patch
+	"${FILESDIR}"/${PN}-16.1-10160.patch
+	"${FILESDIR}"/${PN}-16.1-aarch64.patch
 	"${FILESDIR}"/${PN}-9999-no-arm-flags.patch #400618887
 	"${FILESDIR}"/${PN}-9999-texturepacker.patch
 	"${FILESDIR}"/${PN}-16-ffmpeg3.patch
@@ -147,7 +166,7 @@ pkg_setup() {
 }
 
 src_unpack() {
-	git-r3_src_unpack
+	[[ ${PV} == "9999" ]] && git-r3_src_unpack || default
 }
 
 src_prepare() {
@@ -200,7 +219,6 @@ src_configure() {
 	# Requiring java is asine #434662
 	[[ ${PV} != "9999" ]] && export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
 
-	local amcodec=""
 	if use gxbb ; then
 		export ac_cv_type__Bool=yes
 		MY_ECONF="--enable-codec=amcodec"
@@ -266,10 +284,4 @@ src_install() {
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
 	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
-
-	if use gxbb ; then
-		dodir /usr/share/kodi/udev-configs
-		insinto /usr/share/kodi/udev-configs
-		doins ${FILESDIR}/10-odroid.rules
-	fi
 }
