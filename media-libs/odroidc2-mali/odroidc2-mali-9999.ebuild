@@ -19,75 +19,48 @@ DEPEND=">=app-eselect/eselect-opengl-1.2.6"
 RDEPEND="${DEPEND}
 	media-libs/mesa[gles1,gles2]"
 
-IUSE="fbdev X"
-
+IUSE="-fbdev X"
+REQUIRED_USE="^^ ( fbdev X )"
 
 src_compile() {
 	touch .gles-only
 }
 
 src_install() {
-	# X
+	local opengl_imp="mali"
+	local opengl_dir="/usr/$(get_libdir)/opengl/${opengl_imp}"
+
+	dodir "${opengl_dir}/lib" "${opengl_dir}/include" "${opengl_dir}/extensions"
+
+	insinto ${opengl_dir}/include
+
 	if use X ; then
-		local opengl_imp_x11="mali-x11"
-		local opengl_dir_x11="/usr/$(get_libdir)/opengl/${opengl_imp_x11}"
-
-		dodir "${opengl_dir_x11}/lib" "${opengl_dir_x11}/include" "${opengl_dir_x11}/extensions"
-
-		insinto ${opengl_dir_x11}/include
 		doins -r x11/mali_headers/*
-
-		insinto "${opengl_dir_x11}/lib"
-		insopts -m755
-		doins x11/mali_libs/libUMP.so
-		doins x11/mali_libs/libMali.so
-		dosym "${opengl_dir_x11}/include/ump" "/usr/include/ump"
-		dosym "${opengl_dir_x11}/include/umplock" "/usr/include/umplock"
-
-		local libMali_x11="${opengl_dir_x11}/lib/libMali.so"
-		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libEGL.so"
-		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libEGL.so.1"
-		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libEGL.so.1.4"
-		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libGLESv1_CM.so"
-		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libGLESv1_CM.so.1"
-		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libGLESv1_CM.so.1.1"
-		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libGLESv2.so"
-		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libGLESv2.so.2"
-		dosym "${libMali_x11}" "${opengl_dir_x11}/lib/libGLESv2.so.2.0"
-
-		insinto "${opengl_dir_x11}"
-		doins .gles-only
-
+		dolib.so x11/mali_libs/libUMP.so
+		dolib.so x11/mali_libs/libMali.so
+		dosym "${opengl_dir}/include/ump" "/usr/include/ump"
+		dosym "${opengl_dir}/include/umplock" "/usr/include/umplock"
 	fi
 
-	# fbdev
 	if use fbdev ; then
-		local opengl_imp_fbdev="mali-fbdev"
-		local opengl_dir_fbdev="/usr/$(get_libdir)/opengl/${opengl_imp_fbdev}"
-
-		dodir "${opengl_dir_fbdev}/lib" "${opengl_dir_fbdev}/include" "${opengl_dir_fbdev}/extensions"
-
-		insinto ${opengl_dir_fbdev}/include
 		doins -r fbdev/mali_headers/*
-
-		insinto "${opengl_dir_fbdev}/lib"
-		insopts -m755
-		doins fbdev/mali_libs/libMali.so
-
-		local libMali_fbdev="${opengl_dir_fbdev}/lib/libMali.so"
-		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libEGL.so"
-		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libEGL.so.1"
-		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libEGL.so.1.4"
-		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv1_CM.so"
-		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv1_CM.so.1"
-		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv1_CM.so.1.1"
-		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv2.so"
-		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv2.so.2"
-		dosym "${libMali_fbdev}" "${opengl_dir_fbdev}/lib/libGLESv2.so.2.0"
-
-		insinto "${opengl_dir_fbdev}"
-		doins .gles-only
+		dolib.so fbdev/mali_libs/libMali.so
 	fi
+
+	local libMali="$(get_libdir)/libMali.so"
+	dosym "${libMali}" "${opengl_dir}/lib/libEGL.so"
+	dosym "${libMali}" "${opengl_dir}/lib/libEGL.so.1"
+	dosym "${libMali}" "${opengl_dir}/lib/libEGL.so.1.4"
+	dosym "${libMali}" "${opengl_dir}/lib/libGLESv1_CM.so"
+	dosym "${libMali}" "${opengl_dir}/lib/libGLESv1_CM.so.1"
+	dosym "${libMali}" "${opengl_dir}/lib/libGLESv1_CM.so.1.1"
+	dosym "${libMali}" "${opengl_dir}/lib/libGLESv2.so"
+	dosym "${libMali}" "${opengl_dir}/lib/libGLESv2.so.2"
+	dosym "${libMali}" "${opengl_dir}/lib/libGLESv2.so.2.0"
+
+	insinto "${opengl_dir}"
+	doins .gles-only
+
 
 	# udev rules to get the right ownership/permission for /dev/ump and /dev/mali
 	insinto /lib/udev/rules.d
@@ -98,12 +71,7 @@ src_install() {
 pkg_postinst() {
 	elog "You must be in the video group to use the Mali 3D acceleration."
 	elog
-	if use X ; then
-		elog "To use the Mali OpenGL ES libraries, run \"eselect opengl set mali-x11\""
-	fi
-	if use fbdev ; then
-		elog "To use the Mali OpenGL ES libraries, run \"eselect opengl set mali-fbdev\""
-	fi
+	elog "To use the Mali OpenGL ES libraries, run \"eselect opengl set mali\""
 }
 
 pkg_prerm() {
