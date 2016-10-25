@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-inherit autotools-utils xorg-2 git-r3
+inherit xorg-2 git-r3
 
 EGIT_REPO_URI="https://github.com/mdrjr/c2_mali_ddx.git"
 SRC_URI=""
@@ -17,19 +17,24 @@ SLOT=0
 
 RDEPEND="x11-base/xorg-server"
 DEPEND="${RDEPEND}
-	media-libs/odroidc2-mali[x11]
+	media-libs/odroidc2-mali[X]
 	x11-proto/fontsproto
 	x11-proto/xproto
 	x11-libs/libdrm"
-
-	#PATCHES=( "${FILESDIR}/0001-Fix-DESTDIR-when-performing-install.patch" )
 
 src_prepare() {
 	emake distclean
 }
 
-src_compile() {
-	autotools-utils_src_compile
-	#cp "./src/xorg.conf" "${BUILD_DIR}/src/xorg.conf"
+#src_compile() {
+#	autotools-utils_src_compile
+#	#cp "./src/xorg.conf" "${BUILD_DIR}/src/xorg.conf"
+#}
+
+src_install() {
+	emake DESTDIR="${D}" install
+
+	insinto /etc/X11
+	doins src/xorg.conf
 }
 
