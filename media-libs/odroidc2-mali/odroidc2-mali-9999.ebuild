@@ -47,7 +47,7 @@ src_install() {
 		dolib.so fbdev/mali_libs/libMali.so
 	fi
 
-	local libMali="$(get_libdir)/libMali.so"
+	local libMali="/usr/$(get_libdir)/libMali.so"
 	dosym "${libMali}" "${opengl_dir}/lib/libEGL.so"
 	dosym "${libMali}" "${opengl_dir}/lib/libEGL.so.1"
 	dosym "${libMali}" "${opengl_dir}/lib/libEGL.so.1.4"
