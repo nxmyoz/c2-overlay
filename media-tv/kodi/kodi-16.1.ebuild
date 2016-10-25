@@ -12,7 +12,7 @@ inherit eutils linux-info python-single-r1 multiprocessing autotools toolchain-f
 
 CODENAME="Jarvis"
 EGIT_REPO_URI="git://github.com/Owersun/xbmc.git"
-EGIT_COMMIT="cdb7704d1174395f399657fd3f562fe236516b9"
+EGIT_COMMIT="cdb7704d1174395f399657fd3f562fe236516b9f"
 KEYWORDS="~arm64"
 
 
