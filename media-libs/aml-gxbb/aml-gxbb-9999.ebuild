@@ -57,7 +57,7 @@ src_install() {
 
 	# amavutils
 	dolib.so amavutils/libamavutils.so
-	dosym /usr/lib64/libamavutils.so /usr/lib64/aml_libslibamavutils.so
+	dosym /usr/lib64/libamavutils.so /usr/lib64/aml_libs/libamavutils.so
 
 	doheader amavutils/include/*
 	doheader amavutils/include/cutils/*
