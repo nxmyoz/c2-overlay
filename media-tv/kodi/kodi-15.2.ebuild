@@ -9,9 +9,9 @@ EAPI="5"
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils linux-info python-single-r1 multiprocessing autotools systemd toolchain-funcs user flag-o-matic
+inherit eutils linux-info python-single-r1 multiprocessing autotools toolchain-funcs
 
-CODENAME="Jarvis"
+CODENAME="Isengard"
 case ${PV} in
 9999)
 	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
@@ -19,29 +19,31 @@ case ${PV} in
 	;;
 *|*_p*)
 	MY_PV=${PV/_p/_r}
-	MY_P="kodi-${P}"
-	SRC_URI="http://mirrors.kodi.tv/releases/source/${P}-${CODENAME}.tar.gz -> ${P}.tar.gz
-		https://github.com/xbmc/xbmc/archive/${P}-${CODENAME}.tar.gz -> ${P}.tar.gz
-		!java? ( mirror://sabayon/media-tv/${MY_P}-generated-addons.tar.xz )"
-	KEYWORDS="~arm64"
-	S=${WORKDIR}/xbmc-${P}-${CODENAME}
+	MY_P="${PN}-${MY_PV}"
+	SRC_URI="http://mirrors.kodi.tv/releases/source/${MY_PV}-${CODENAME}.tar.gz -> ${P}.tar.gz
+		https://github.com/xbmc/xbmc/archive/${PV}-${CODENAME}.tar.gz -> ${P}.tar.gz
+		!java? ( http://mirrors.kodi.tv/releases/source/${MY_P}-generated-addons.tar.xz )"
+	KEYWORDS="~amd64 ~x86"
+
+	S=${WORKDIR}/xbmc-${PV}-${CODENAME}
 	;;
 esac
 
 DESCRIPTION="Kodi is a free and open source media-player and entertainment hub"
-HOMEPAGE="http://kodi.tv/ http://kodi.wiki/"
+HOMEPAGE="https://kodi.tv/ http://kodi.wiki/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+fbdev airplay airtunes +alsa avahi bluetooth bluray caps +cec css dbus debug gles opengl +java joystick midi mysql +nfs profile -projectm pulseaudio rtmp +samba sftp test +texturepacker udisks upnp upower +usb vaapi vdpau webserver -X"
+IUSE="airplay alsa avahi bluetooth bluray caps cec css dbus debug +fishbmc gles goom java joystick midi mysql nfs +opengl profile +projectm pulseaudio +rsxs rtmp +samba sftp +spectrum test +texturepacker udisks upnp upower +usb vaapi vdpau +waveform webserver +X"
+# gles/vaapi: http://trac.kodi.tv/ticket/10552 #464306
 REQUIRED_USE="
 	|| ( gles opengl )
 	gles? ( !vaapi )
 	vaapi? ( !gles )
+	rsxs? ( X )
 	udisks? ( dbus )
 	upower? ( dbus )
 "
-RESTRICT="mirror"
 
 COMMON_DEPEND="${PYTHON_DEPS}
 	app-arch/bzip2
@@ -49,7 +51,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-arch/zip
 	app-i18n/enca
 	airplay? ( app-pda/libplist )
-	airtunes? ( net-misc/shairplay )
 	dev-libs/boost
 	dev-libs/expat
 	dev-libs/fribidi
@@ -57,7 +58,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	cec? ( >=dev-libs/libcec-3.0 )
 	dev-libs/libpcre[cxx]
 	dev-libs/libxml2
-	sys-apps/lsb-release
 	dev-libs/libxslt
 	>=dev-libs/lzo-2.04
 	dev-libs/tinyxml[stl]
@@ -70,25 +70,24 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/fontconfig
 	media-libs/freetype
 	media-libs/jasper
-	x11-apps/xrefresh
 	media-libs/jbigkit
 	>=media-libs/libass-0.9.7
-	net-libs/libssh
-	bluray? ( >=media-libs/libbluray-0.7.0 )
+	bluray? ( media-libs/libbluray )
 	css? ( media-libs/libdvdcss )
 	media-libs/libmad
 	media-libs/libmodplug
 	media-libs/libmpeg2
 	media-libs/libogg
 	media-libs/libpng:0=
+	projectm? ( media-libs/libprojectm )
 	media-libs/libsamplerate
 	joystick? ( media-libs/libsdl2 )
 	>=media-libs/taglib-1.8
 	media-libs/libvorbis
 	media-libs/tiff:0=
-	media-sound/dcadec
 	pulseaudio? ( media-sound/pulseaudio )
 	media-sound/wavpack
+	>=media-video/ffmpeg-2.6:=[encode]
 	rtmp? ( media-video/rtmpdump )
 	avahi? ( net-dns/avahi )
 	nfs? ( net-fs/libnfs:= )
@@ -103,10 +102,18 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	virtual/jpeg:0=
 	usb? ( virtual/libusb:1 )
 	mysql? ( virtual/mysql )
-	media-libs/mesa[gles2]
+	opengl? (
+		virtual/glu
+		virtual/opengl
+		>=media-libs/glew-1.5.6
+	)
+	gles? (
+		media-libs/mesa[gles2]
+	)
 	vaapi? ( x11-libs/libva[opengl] )
 	vdpau? (
-		|| ( >=x11-libs/libvdpau-1.1 >=x11-drivers/nvidia-drivers-180.51 )
+		|| ( x11-libs/libvdpau >=x11-drivers/nvidia-drivers-180.51 )
+		media-video/ffmpeg[vdpau]
 	)
 	X? (
 		x11-apps/xdpyinfo
@@ -114,28 +121,21 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		x11-libs/libXinerama
 		x11-libs/libXrandr
 		x11-libs/libXrender
-)"
+	)"
 RDEPEND="${COMMON_DEPEND}
 	!media-tv/xbmc
-	!media-tv/kodi
 	udisks? ( sys-fs/udisks:0 )
 	upower? ( || ( sys-power/upower sys-power/upower-pm-utils ) )"
 DEPEND="${COMMON_DEPEND}
 	app-arch/xz-utils
 	dev-lang/swig
-	media-video/ffmpeg
-	dev-libs/crossguid
 	dev-util/gperf
+	texturepacker? ( media-libs/giflib )
 	X? ( x11-proto/xineramaproto )
 	dev-util/cmake
 	x86? ( dev-lang/nasm )
 	java? ( virtual/jre )
-	test? ( dev-cpp/gtest )
-	texturepacker? ( media-libs/giflib )
-	virtual/pkgconfig
-	X? ( media-libs/odroidc2-mali[x11,-fbdev] )
-	media-libs/aml-gxbb
-	fbdev? ( media-libs/odroidc2-mali[fbdev,-x11] )"
+	test? ( dev-cpp/gtest )"
 # Force java for latest git version to avoid having to hand maintain the
 # generated addons package.  #488118
 [[ ${PV} == "9999" ]] && DEPEND+=" virtual/jre"
@@ -149,23 +149,6 @@ Please consider enabling IP_MULTICAST under Networking options.
 pkg_setup() {
 	check_extra_config
 	python-single-r1_pkg_setup
-	enewgroup kodi
-	enewuser kodi -1 -1 /home/kodi kodi
-	if ! egetent group video | grep -q kodi; then
-					local g=$(groups kodi)
-					elog "Adding user kodi to video group"
-					usermod -G video,${g// /,} kodi || die "Adding user kodi to video group failed"
-	fi
-	if ! egetent group input | grep -q kodi; then
-					local g=$(groups kodi)
-					elog "Adding user kodi to input group"
-					usermod -G input,${g// /,} kodi || die "Adding user kodi to input group failed"
-	fi
-	if ! egetent group audio | grep -q kodi; then
-					local g=$(groups kodi)
-					elog "Adding user kodi to audio group"
-					usermod -G audio,${g// /,} kodi || die "Adding user kodi to audio group failed"
-	fi
 }
 
 src_unpack() {
@@ -174,8 +157,8 @@ src_unpack() {
 
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-9999-no-arm-flags.patch #400617
-	epatch "${FILESDIR}"/${PN}-9999-texturepacker.patch
-	epatch "${FILESDIR}"/${PN}-16-ffmpeg3.patch
+	epatch "${FILESDIR}"/${PN}-15.1-texturepacker.patch
+	epatch_user #293109
 
 	# some dirs ship generated autotools, some dont
 	multijob_init
@@ -193,7 +176,9 @@ src_prepare() {
 	multijob_finish
 	elibtoolize
 
-	tc-env_build emake -f codegenerator.mk
+	if [[ ${PV} == "9999" ]] || use java ; then #558798
+		tc-env_build emake -f codegenerator.mk
+	fi
 
 	# Disable internal func checks as our USE/DEPEND
 	# stuff handles this just fine already #408395
@@ -207,8 +192,6 @@ src_prepare() {
 	sed -i \
 		-e '/dbus_connection_send_with_reply_and_block/s:-1:3000:' \
 		xbmc/linux/*.cpp || die
-
-	epatch_user #293109
 
 	# Tweak autotool timestamps to avoid regeneration
 	find . -type f -exec touch -r configure {} +
@@ -224,66 +207,45 @@ src_configure() {
 	# Requiring java is asine #434662
 	[[ ${PV} != "9999" ]] && export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
 
-	export gl_cv_func_gettimeofday_clobber=no
-
-	append-flags -I/usr/lib64/opengl/mali/include
-	append-ldflags -L/usr/lib64/opengl/mali/lib -L/usr/lib64/aml_libs
-
-	if use fbdev ; then
-		econf \
-			--docdir=/usr/share/doc/${PF} \
-			--disable-gl \
-			--enable-gles \
-			--disable-sdl \
-			--enable-optimizations \
-			--disable-x11 \
-			--disable-goom \
-			--disable-xrandr \
-			--disable-mid \
-			--enable-nfs \
-			--disable-profiling \
-			--enable-rsxs \
-			--disable-debug \
-			--disable-joystick \
-			--disable-vaapi \
-			--disable-vdpau \
-			--disable-avahi \
-			--enable-libcec \
-			--enable-pulse \
-			--disable-projectm \
-			--disable-optical-drive \
-			--disable-dvdcss \
-			--disable-vtbdecoder \
-			--enable-codec=amcodec
-	fi
-
-	if use X ; then
-		econf \
-			--docdir=/usr/share/doc/${PF} \
-			--disable-gl \
-			--enable-gles \
-			--disable-sdl \
-			--enable-optimizations \
-			--disable-goom \
-			--disable-xrandr \
-			--disable-mid \
-			--enable-nfs \
-			--disable-profiling \
-			--enable-rsxs \
-			--disable-debug \
-			--disable-joystick \
-			--disable-vaapi \
-			--disable-vdpau \
-			--disable-avahi \
-			--enable-libcec \
-			--enable-pulse \
-			--disable-projectm \
-			--disable-optical-drive \
-			--disable-dvdcss \
-			--disable-vtbdecoder \
-			--enable-codec=amcodec
-	fi
-
+	econf \
+		--docdir=/usr/share/doc/${PF} \
+		--disable-ccache \
+		--disable-optimizations \
+		--with-ffmpeg=shared \
+		$(use_enable alsa) \
+		$(use_enable airplay) \
+		$(use_enable avahi) \
+		$(use_enable bluray libbluray) \
+		$(use_enable caps libcap) \
+		$(use_enable cec libcec) \
+		$(use_enable css dvdcss) \
+		$(use_enable dbus) \
+		$(use_enable debug) \
+		$(use_enable fishbmc) \
+		$(use_enable gles) \
+		$(use_enable goom) \
+		$(use_enable joystick) \
+		$(use_enable midi mid) \
+		$(use_enable mysql) \
+		$(use_enable nfs) \
+		$(use_enable opengl gl) \
+		$(use_enable profile profiling) \
+		$(use_enable projectm) \
+		$(use_enable pulseaudio pulse) \
+		$(use_enable rsxs) \
+		$(use_enable rtmp) \
+		$(use_enable samba) \
+		$(use_enable sftp ssh) \
+		$(use_enable spectrum) \
+		$(use_enable usb libusb) \
+		$(use_enable test gtest) \
+		$(use_enable texturepacker) \
+		$(use_enable upnp) \
+		$(use_enable vaapi) \
+		$(use_enable vdpau) \
+		$(use_enable waveform) \
+		$(use_enable webserver) \
+		$(use_enable X x11)
 }
 
 src_compile() {
@@ -292,15 +254,18 @@ src_compile() {
 
 src_install() {
 	default
-	rm "${ED}"/usr/share/doc/*/{LICENSE.GPL,copying.txt}* || die
+	rm "${ED}"/usr/share/doc/*/{LICENSE.GPL,copying.txt}*
 
 	domenu tools/Linux/kodi.desktop
 	newicon media/icon48x48.png kodi.png
 
-	insinto /etc/udev/rules.d
-	newins "${FILESDIR}/99-input.rules" 99-input.rules
-	insinto /usr/share/polkit-1/rules.d/
-	newins "${FILESDIR}/kodi.rules" 99-kodi.rules
+	# Remove optional addons (platform specific).
+	local disabled_addons=(
+		repository.pvr-{android,ios,osx{32,64},win32}.xbmc.org
+		visualization.dxspectrum
+		visualization.vortex
+	)
+	rm -rf "${disabled_addons[@]/#/${ED}/usr/share/kodi/addons/}"
 
 	# Remove fonconfig settings that are used only on MacOSX.
 	# Can't be patched upstream because they just find all files and install
@@ -312,7 +277,7 @@ src_install() {
 	# bold-caps.ttf: unknown
 	# roboto: roboto-bold, roboto-regular
 	# arial.ttf: font mashed from droid/roboto, not removed wrt bug#460514
-	rm -rf "${ED}"/usr/share/kodi/addons/skin.confluence/fonts/Roboto-* || die
+	rm -rf "${ED}"/usr/share/kodi/addons/skin.confluence/fonts/Roboto-*
 	dosym /usr/share/fonts/roboto/Roboto-Regular.ttf \
 		/usr/share/kodi/addons/skin.confluence/fonts/Roboto-Regular.ttf
 	dosym /usr/share/fonts/roboto/Roboto-Bold.ttf \
@@ -320,10 +285,4 @@ src_install() {
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
 	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
-	dobin "${FILESDIR}"/startkodi
-	systemd_dounit "${FILESDIR}"/${PN}.service
-
-	insinto /etc/sudoers.d/
-	newins "${FILESDIR}/chvt.sudoers" chvt
-
 }
