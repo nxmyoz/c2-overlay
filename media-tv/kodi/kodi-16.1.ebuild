@@ -8,27 +8,13 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils linux-info python-single-r1 multiprocessing autotools toolchain-funcs
+inherit eutils linux-info python-single-r1 multiprocessing autotools toolchain-funcs git-r3
 
 CODENAME="Jarvis"
-case ${PV} in
-9999)
-	EGIT_REPO_URI="git://github.com/xbmc/xbmc.git"
-	inherit git-r3
-	;;
-*)
-	MY_PV=${PV/_p/_r}
-	MY_PV=${MY_PV//_alpha/a}
-	MY_PV=${MY_PV//_beta/b}
-	MY_PV=${MY_PV//_rc/rc}
-	MY_P="${PN}-${MY_PV}"
-	SRC_URI="https://github.com/xbmc/xbmc/archive/${MY_PV}-${CODENAME}.tar.gz -> ${MY_P}.tar.gz
-		!java? ( https://github.com/candrews/gentoo-kodi/raw/master/${MY_P}-generated-addons.tar.xz )"
-	KEYWORDS="~amd64 ~x86"
+EGIT_REPO_URI="git://github.com/Owersun/xbmc.git"
+EGIT_COMMIT="cdb7704d1174395f399657fd3f562fe236516b9"
+KEYWORDS="~arm64"
 
-	S=${WORKDIR}/xbmc-${MY_PV}-${CODENAME}
-	;;
-esac
 
 DESCRIPTION="Kodi is a free and open source media-player and entertainment hub"
 HOMEPAGE="https://kodi.tv/ http://kodi.wiki/"
@@ -161,7 +147,7 @@ pkg_setup() {
 }
 
 src_unpack() {
-	[[ ${PV} == "9999" ]] && git-r3_src_unpack || default
+	git-r3_src_unpack
 }
 
 src_prepare() {
@@ -224,6 +210,7 @@ src_configure() {
 		--disable-ccache \
 		--disable-optimizations \
 		--with-ffmpeg=shared \
+		${MY_ECONF} \
 		$(use_enable alsa) \
 		$(use_enable airplay) \
 		$(use_enable bluray libbluray) \
