@@ -217,7 +217,7 @@ src_configure() {
 	local amcodec=""
 	if use gxbb ; then
 		export ac_cv_type__Bool=yes
-		local export amcodec="--enable-codec=amcodec"
+		MY_ECONF="--enable-codec=amcodec"
 	fi
 
 	econf \
@@ -251,8 +251,7 @@ src_configure() {
 		$(use_enable vdpau) \
 		$(use_enable webserver) \
 		$(use_enable X x11) \
-		$(use_enable zeroconf avahi) \
-		${amcodec}
+		$(use_enable zeroconf avahi)
 }
 
 src_compile() {
