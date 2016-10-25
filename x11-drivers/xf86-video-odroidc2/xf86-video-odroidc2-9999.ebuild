@@ -24,15 +24,12 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	emake distclean
+
+	xorg-2_src_prepare
 }
 
-#src_compile() {
-#	autotools-utils_src_compile
-#	#cp "./src/xorg.conf" "${BUILD_DIR}/src/xorg.conf"
-#}
-
 src_install() {
-	emake DESTDIR="${D}" install
+	xorg-2_src_install
 
 	insinto /etc/X11
 	doins src/xorg.conf
