@@ -35,7 +35,7 @@ HOMEPAGE="https://kodi.tv/ http://kodi.wiki/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+amcodec airplay alsa bluetooth bluray caps cec dbus debug gles java midi mysql nfs +opengl profile pulseaudio +samba sftp test +texturepacker udisks upnp upower +usb vaapi vdpau webserver +X zeroconf"
+IUSE="gxbb airplay alsa bluetooth bluray caps cec dbus debug +gles java midi mysql nfs opengl profile pulseaudio samba sftp test texturepacker udisks upnp upower +usb vaapi vdpau webserver +X zeroconf"
 # gles/vaapi: http://trac.kodi.tv/ticket/10552 #464306
 REQUIRED_USE="
 	|| ( gles opengl )
@@ -114,7 +114,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		x11-libs/libXrender
 	)
 	zeroconf? ( net-dns/avahi )
-	amcodec? ( media-libs/aml-gxbb )
+	gxbb? ( media-libs/aml-gxbb )
 "
 RDEPEND="${COMMON_DEPEND}
 	!media-tv/xbmc
@@ -206,16 +206,16 @@ src_configure() {
 	# Requiring java is asine #434662
 	[[ ${PV} != "9999" ]] && export ac_cv_path_JAVA_EXE=$(which $(usex java java true))
 
-	local amcodec=""
-	if use amcodec ; then
-		export ac_cv_type__Bool=yes
-		local export amcodec="--enable-codec=amcodec"
+	if use gxbb ; then
+		#export ac_cv_type__Bool=yes
+		MY_ECONF="--enable-codec=amcodec"
 	fi
 
 	econf \
 		--disable-ccache \
 		--disable-optimizations \
 		--with-ffmpeg=shared \
+		${MY_ECONF} \
 		$(use_enable alsa) \
 		$(use_enable airplay) \
 		$(use_enable bluray libbluray) \
@@ -240,8 +240,7 @@ src_configure() {
 		$(use_enable vdpau) \
 		$(use_enable webserver) \
 		$(use_enable X x11) \
-		$(use_enable zeroconf avahi) \
-		${amcodec}
+		$(use_enable zeroconf avahi)
 }
 
 src_compile() {
@@ -272,9 +271,4 @@ src_install() {
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
 	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
-
-	if use amcodec ; then
-		doins ${FILESDIR}/10-odroid.rules
-	fi
-
 }
