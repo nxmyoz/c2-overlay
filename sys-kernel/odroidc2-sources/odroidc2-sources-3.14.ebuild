@@ -35,7 +35,6 @@ src_unpack()
 {
 	git-r3_src_unpack
 	unpack_set_extraversion
-
-	epatch "${FILESDIR}/sound_soc_aml_m8-Report-only-working-frequecies-and-bit-depths.patch"
-
 }
+
+
