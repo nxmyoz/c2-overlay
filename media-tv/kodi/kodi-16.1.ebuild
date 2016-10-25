@@ -264,7 +264,7 @@ src_configure() {
 
 src_compile() {
 	if use gxbb ; then
-		append-ldflags=-L/usr/lib64/opengl/mali/lib -L/usr/lib64/aml_libs
+		append-ldflags -L/usr/lib64/opengl/mali/lib -L/usr/lib64/aml_libs
 	fi
 
 	emake V=1
