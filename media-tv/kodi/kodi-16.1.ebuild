@@ -8,7 +8,7 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils linux-info python-single-r1 multiprocessing autotools toolchain-funcs
+inherit eutils linux-info python-single-r1 multiprocessing autotools toolchain-funcs flag-o-matic
 
 CODENAME="Jarvis"
 case ${PV} in
@@ -123,7 +123,10 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		x11-libs/libXrender
 	)
 	zeroconf? ( net-dns/avahi )
-	gxbb? ( media-libs/aml-gxbb )
+	gxbb? ( 
+		media-libs/aml-gxbb
+		media-libs/odroidc2-mali
+	)
 "
 RDEPEND="${COMMON_DEPEND}
 	!media-tv/xbmc
@@ -260,6 +263,10 @@ src_configure() {
 }
 
 src_compile() {
+	if use gxbb ; then
+		append-ldflags=-L/usr/lib64/opengl/mali/lib -L/usr/lib64/aml_libs
+	fi
+
 	emake V=1
 }
 
