@@ -35,5 +35,6 @@ src_install() {
 	doins fip/gxb/bl301.bin
 	doins fip/gxb/bl31.bin
 	doins sd_fuse/bl1.bin.hardkernel
+	doins sd_fuse/sd_fusing.sh
 }
 
