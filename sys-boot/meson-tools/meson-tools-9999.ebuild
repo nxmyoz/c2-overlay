@@ -34,15 +34,15 @@ src_compile() {
 
 src_install() {
 	if use amlbootsig ; then
-		dosbin amlbootsig
+		dobin amlbootsig
 	fi
 
 	if use unamlbootsig ; then
-		dosbin unamlbootsig
+		dobin unamlbootsig
 	fi
 
 	if use amlinfo ; then
-		dosbin amlinfo
+		dobin amlinfo
 	fi
 
 	dodoc README.md
