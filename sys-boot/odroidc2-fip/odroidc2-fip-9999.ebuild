@@ -3,6 +3,8 @@
 
 EAPI=6
 
+inherit git-r3
+
 DESCRIPTION=""
 HOMEPAGE=""
 SRC_URI=""
