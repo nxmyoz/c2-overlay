@@ -1,5 +1,0 @@
-
-# Fix permissions for /dev/am* files
-#KERNEL=="event*", SUBSYSTEM=="input", MODE="0777"
-KERNEL=="CEC", MODE="0777"
-KERNEL=="am*", MODE="0666"
