@@ -33,7 +33,6 @@ RDEPEND="${DEPEND}"
 
 if [[ ${PV} == 9999 ]] ; then
 	SRC_URI=""
-	S=${WORKDIR}/u-boot
 else
 	SRC_URI="ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2"
 	S=${WORKDIR}/u-boot-${PV}
