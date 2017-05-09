@@ -21,3 +21,9 @@ RDEPEND="${DEPEND}"
 src_compile() {
 	emake all
 }
+
+src_install() {
+	dosbin amlbootsig
+	dosbin unamlbootsig
+	dosbin amlinfo
+}
