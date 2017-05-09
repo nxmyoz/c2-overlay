@@ -18,6 +18,6 @@ IUSE=""
 DEPEND="dev-libs/openssl:0="
 RDEPEND="${DEPEND}"
 
-src_compile {
+src_compile() {
 	emake all
 }
