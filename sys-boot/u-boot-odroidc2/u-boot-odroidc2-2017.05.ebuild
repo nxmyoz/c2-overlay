@@ -10,7 +10,7 @@ if [[ ${PV} = 9999 ]]; then
         EXPERIMENTAL="true"
 fi
 
-inherit eutils user flag-o-matic systemd autotools ${GIT_ECLASS}
+inherit ${GIT_ECLASS}
 
 
 DESCRIPTION="Mainline U-Boot for ODROID-C2"
