@@ -30,6 +30,9 @@ src_install() {
 
 	dodir /usr/share/${PN}
 	insinto /usr/share/${PN}
-	doins -r fip/gxb
+	doins fip/gxb/bl2.package
+	doins fip/gxb/bl30.bin
+	doins fip/gxb/bl301.bin
+	doins fip/gxb/bl31.bin
 }
 
