@@ -44,4 +44,6 @@ src_install() {
 	if use amlinfo ; then
 		dosbin amlinfo
 	fi
+
+	dodoc Readme.md
 }
