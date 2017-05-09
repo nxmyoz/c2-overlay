@@ -45,5 +45,5 @@ src_install() {
 		dosbin amlinfo
 	fi
 
-	dodoc Readme.md
+	dodoc README.md
 }
