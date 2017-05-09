@@ -34,7 +34,7 @@ if [[ ${PV} == 9999 ]] ; then
 	SRC_URI=""
 else
 	SRC_URI="ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2"
-	KEYWORDS="~amd64"
+	KEYWORDS="~arm ~arm64"
 fi
 
 
