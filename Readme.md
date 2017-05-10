@@ -6,6 +6,7 @@ ODROID-C2 Gentoo Overlay
 This is a Gentoo overlay for additional tools neccessary for running Gentoo Linux on the Hardkernel ODROID C2 single board computer. More information about the ODROID c2 can be found [here](http://odroid.com/dokuwiki/doku.php?id=en:odroid-c2).
 
 At the moment this overlay provides:
+
 Package Name | Description
 ------------ | -------------
 sys-boot/meson-tools | [meson-tools](https://github.com/afaerber/meson-tools), alternative to aml_encrypt_gxb
