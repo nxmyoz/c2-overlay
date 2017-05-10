@@ -7,7 +7,7 @@ This is a Gentoo overlay for additional tools neccessary for running Gentoo Linu
 
 At the moment this overlay provides:
 Package Name | Description
--------------|-----------
+------------ | -------------
 sys-boot/meson-tools | [meson-tools](https://github.com/afaerber/meson-tools), alternative to aml_encrypt_gxb
 sys-boot/odroidc2-fip | [fip_create](https://github.com/hardkernel/u-boot/tree/odroidc2-v2015.01/tools/fip_create) and Hardkernel's ARM Trusted Firmware [binaries](https://github.com/hardkernel/u-boot/tree/odroidc2-v2015.01/fip) from their repository
 sys-boot/u-boot-odroidc2 | Mainline U-Boot
