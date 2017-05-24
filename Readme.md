@@ -76,7 +76,7 @@ The ebuilds provided in this overlay aim to make life simpler by providing all t
 
 while `u-boot-odroidc2` will just build the u-boot image with using the `odroid-c2_defconfig`, and install the resulting image in `/usr/share/u-boot-odroidc2/u-boot-${PV}.bin`, e.g. for `sys-boot/u-boot-odroidc2-2017.05` it would be `/usr/share/u-boot-odroidc2/u-boot-2017.05.bin`.
 
-You now can simply generate u-boot in the neccessary format by, [as described in u-boot sources](http://git.denx.de/?p=u-boot.git;a=blob_plain;f=board/amlogic/odroid-c2/README;hb=HEAD), however without the ivokation of `aml_encrypt_gxb`:
+You now can simply generate u-boot in the neccessary format by, [as described in u-boot sources](http://git.denx.de/?p=u-boot.git;a=blob_plain;f=board/amlogic/odroid-c2/README;hb=HEAD), however without the invocation of `aml_encrypt_gxb`:
 
 ```bash
 PV="2017.05"
