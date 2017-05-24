@@ -9,9 +9,9 @@ At the moment this overlay provides:
 
 Package Name | Description
 ------------ | -------------
-sys-boot/meson-tools | [meson-tools](https://github.com/afaerber/meson-tools), alternative to aml_encrypt_gxb
-sys-boot/odroidc2-fip | [fip_create](https://github.com/hardkernel/u-boot/tree/odroidc2-v2015.01/tools/fip_create) and Hardkernel's ARM Trusted Firmware [binaries](https://github.com/hardkernel/u-boot/tree/odroidc2-v2015.01/fip) from their repository
-sys-boot/u-boot-odroidc2 | Mainline U-Boot
+dev-embedded/meson-tools | [meson-tools](https://github.com/afaerber/meson-tools), alternative to aml_encrypt_gxb
+dev-embedded/odroidc2-fip | [fip_create](https://github.com/hardkernel/u-boot/tree/odroidc2-v2015.01/tools/fip_create) and Hardkernel's ARM Trusted Firmware [binaries](https://github.com/hardkernel/u-boot/tree/odroidc2-v2015.01/fip) from their repository
+dev-embedded/u-boot-odroidc2 | Mainline U-Boot
 
 ### Some Notes
 At this moment all that is described in here will give you a headless setup, without any multimedial features, such as graphics (don't even think of accelerated graphics as of yet) nor sound via hdmi.
@@ -55,7 +55,7 @@ MAKEOPTS="-j2"
 
 Mainline U-Boot support, with booting from the mmc & sd is available starting with 2017.05.
 
-You will need to install [sys-boot/u-boot-tools](https://packages.gentoo.org/packages/dev-embedded/u-boot-tools) should you desire to generate your own boot.scr boot script.
+You will need to install [dev-embedded/u-boot-tools](https://packages.gentoo.org/packages/dev-embedded/u-boot-tools) should you desire to generate your own boot.scr boot script.
 
 The ebuilds provided in this overlay aim to make life simpler by providing all that is needed to build a working U-Boot.
 
@@ -74,7 +74,7 @@ The ebuilds provided in this overlay aim to make life simpler by providing all t
 /usr/share/odroidc2-fip/sd_fusing.sh
 ```
 
-while `u-boot-odroidc2` will just build the u-boot image with using the `odroid-c2_defconfig`, and install the resulting image in `/usr/share/u-boot-odroidc2/u-boot-${PV}.bin`, e.g. for `sys-boot/u-boot-odroidc2-2017.05` it would be `/usr/share/u-boot-odroidc2/u-boot-2017.05.bin`.
+while `u-boot-odroidc2` will just build the u-boot image with using the `odroid-c2_defconfig`, and install the resulting image in `/usr/share/u-boot-odroidc2/u-boot-${PV}.bin`, e.g. for `dev-embedded/u-boot-odroidc2-2017.05` it would be `/usr/share/u-boot-odroidc2/u-boot-2017.05.bin`.
 
 You now can simply generate u-boot in the neccessary format by, [as described in u-boot sources](http://git.denx.de/?p=u-boot.git;a=blob_plain;f=board/amlogic/odroid-c2/README;hb=HEAD), however without the invocation of `aml_encrypt_gxb`:
 

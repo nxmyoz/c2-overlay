@@ -3,11 +3,10 @@
 
 EAPI=6
 
-inherit git-r3 flag-o-matic
+inherit git-r3
 
 DESCRIPTION="A collection of tools for use with the Amlogic Meson family of ARM based SoCs"
 HOMEPAGE="https://github.com/afaerber/meson-tools"
-SRC_URI=""
 EGIT_REPO_URI="https://github.com/afaerber/meson-tools.git"
 
 LICENSE="GPL-2"

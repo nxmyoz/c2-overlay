@@ -7,15 +7,12 @@ EGIT_REPO_URI="git://git.denx.de/u-boot.git"
 
 if [[ ${PV} = 9999 ]]; then
         GIT_ECLASS="git-r3"
-        EXPERIMENTAL="true"
 fi
 
 inherit ${GIT_ECLASS}
 
-
 DESCRIPTION="Mainline U-Boot for ODROID-C2"
 HOMEPAGE="https://www.denx.de/wiki/U-Boot"
-#SRC_URI="ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2"
 
 LICENSE=""
 SLOT="0"
