@@ -15,13 +15,13 @@ inherit ${GIT_ECLASS}
 DESCRIPTION="Mainline U-Boot for ODROID-C2"
 HOMEPAGE="https://www.denx.de/wiki/U-Boot"
 
-LICENSE=""
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~arm64"
 IUSE=""
 
 DEPEND="
-	sys-boot/meson-tools
+	dev-embedded/meson-tools
 	sys-apps/dtc
 	dev-lang/python:2.7
 "

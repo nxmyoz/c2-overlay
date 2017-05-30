@@ -12,7 +12,7 @@ SRC_URI=""
 EGIT_REPO_URI="https://github.com/hardkernel/u-boot.git"
 EGIT_BRANCH="odroidc2-v2015.01"
 
-LICENSE=""
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~arm ~arm64"
 IUSE=""

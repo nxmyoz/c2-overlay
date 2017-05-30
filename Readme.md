@@ -17,7 +17,7 @@ dev-embedded/u-boot-odroidc2 | Mainline U-Boot
 At this moment all that is described in here will give you a headless setup, without any multimedial features, such as graphics (don't even think of accelerated graphics as of yet) nor sound via hdmi.
 Despite the mainline kernel having gained some support for hdmi, it is of no use at this present moment.
 
-Please refer to the mainling project at http://linux-meson.com.
+Please refer to the mainlinening project at http://linux-meson.com.
 
 # Installation
 Obviously, if you already know what an Gentoo overlay is and how to use one, detailed instructions on how to bring Gentoo onto the C2 are not needed. You've clearly the expertise.
