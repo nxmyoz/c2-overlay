@@ -64,6 +64,8 @@ The ebuilds provided in this overlay aim to make life simpler by providing all t
 1. Use this overlay
 2. `emerge -av meson-tools odroidc2-fip u-boot-odroidc2`
 
+Note: When building u-boot, make sure your default Python is set to 2.7 (via [`eselect python ...`](https://wiki.gentoo.org/wiki/Python#Configuration), or else the build will fail.
+
 `odroidc2-fip` will provide the following files:
 ```
 /usr/bin/fip_create
