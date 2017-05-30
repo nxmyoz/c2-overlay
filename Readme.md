@@ -40,11 +40,12 @@ MAKEOPTS="-j4"
 CPU_FLAGS_ARM="edsp neon thumb vfp vfpv3 vfpv4 vfp-d32 crc32 v4 v5 v6 v7 v8 thumb2"
 ```
 
-llvm won't build with `MAKEOPTS="-j4"`, so a workaround is needed, like per package env, setting the `MAKEOPTS` to `-j2`:
+llvm won't build with `MAKEOPTS="-j4"`, so a workaround is needed, like per package env, setting the `MAKEOPTS` to `-j2`, as well as boost, which may lead to a hangup of the C2:
 
 ```
 # cat /etc/portage/package.env
 sys-devel/llvm makeopts-j2
+dev-libs/boost makeopts-j2
 
 # cat /etc/portage/env/makeopts-j2
 MAKEOPTS="-j2"
