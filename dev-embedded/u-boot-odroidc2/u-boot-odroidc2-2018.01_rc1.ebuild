@@ -33,7 +33,7 @@ if [[ ${PV} == 9999 ]] ; then
 else
 	MY_PV=${PV/_/-}
 	SRC_URI="ftp://ftp.denx.de/pub/u-boot/u-boot-${MY_PV}.tar.bz2"
-	S=${WORKDIR}/u-boot-${PV}
+	S=${WORKDIR}/u-boot-${MY_PV}
 	KEYWORDS="~arm ~arm64"
 fi
 
