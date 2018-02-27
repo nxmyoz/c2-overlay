@@ -40,7 +40,7 @@ fi
 
 src_compile() {
 	emake odroid-c2_defconfig
-	#emake -j2
+	emake -j2
 }
 
 src_install() {
