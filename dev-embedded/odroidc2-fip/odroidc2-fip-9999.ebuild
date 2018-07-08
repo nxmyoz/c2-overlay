@@ -22,8 +22,8 @@ RDEPEND="${DEPEND}"
 
 src_compile() {
 	cd tools/fip_create
-	HOSTCC=cc
-	HOSTLD=ld
+	export HOSTCC=cc
+	export HOSTLD=ld
 	emake || die "Build failed!"
 }
 
