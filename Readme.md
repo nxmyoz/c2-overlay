@@ -109,7 +109,11 @@ dd if=$DIR/u-boot.gxbb of=$DEV conv=fsync bs=512 seek=97
 That should work.
 
 # Kernel (gentoo-sources)
+## gentoo-sources-4.11
 A minimal (at least from my perspective) kernel config for `>=sys-kernel/gentoo-sources-4.11` can be found in this repository [here](https://github.com/nxmyoz/c2-overlay/blob/master/c2.config).
+
+## gentoo-sources-4.19
+There is a working kernel config to be found [here](https://github.com/nxmyoz/c2-overlay/blob/master/c2-4.19.config).
 
 Here are the steps in building the kernel:
 
