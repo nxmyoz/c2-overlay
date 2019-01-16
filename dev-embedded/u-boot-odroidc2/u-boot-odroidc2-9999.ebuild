@@ -31,11 +31,11 @@ RDEPEND="${DEPEND}"
 if [[ ${PV} == 9999 ]] ; then
 	SRC_URI=""
 else
-	SRC_URI="ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2"
-	S=${WORKDIR}/u-boot-${PV}
+	MY_PV=${PV/_/-}
+	SRC_URI="ftp://ftp.denx.de/pub/u-boot/u-boot-${MY_PV}.tar.bz2"
+	S=${WORKDIR}/u-boot-${MY_PV}
 	KEYWORDS="~arm ~arm64"
 fi
-
 
 src_compile() {
 	emake odroid-c2_defconfig
@@ -45,12 +45,16 @@ src_compile() {
 src_install() {
 	dodir /usr/share/u-boot-odroidc2
 	insinto /usr/share/u-boot-odroidc2
-	
+
 	if [[ ${PV} == 9999 ]] ; then
 		newins u-boot.bin u-boot-git.bin
 	else
 		newins u-boot.bin u-boot-${PV}.bin
 	fi
-	
-	dodoc board/amlogic/odroid-c2/README
+
+	dodoc board/amlogic/odroid-c2/README.odroid-c2
+}
+
+pkg_postinst() {
+	elog "If the MAKEOPTS -j option is set too high, the build process may fail."
 }

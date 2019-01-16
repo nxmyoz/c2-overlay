@@ -37,26 +37,24 @@ else
 	KEYWORDS="~arm ~arm64"
 fi
 
-
 src_compile() {
 	emake odroid-c2_defconfig
-	emake -j2
+	emake
 }
 
 src_install() {
 	dodir /usr/share/u-boot-odroidc2
 	insinto /usr/share/u-boot-odroidc2
-	
+
 	if [[ ${PV} == 9999 ]] ; then
 		newins u-boot.bin u-boot-git.bin
 	else
 		newins u-boot.bin u-boot-${PV}.bin
 	fi
-	
-	dodoc board/amlogic/odroid-c2/README
+
+	dodoc board/amlogic/odroid-c2/README.odroid-c2
 }
 
 pkg_postinst() {
-    elog "U-Boot was built with MAKEOPTS="-j2" instead as a precaution."
-    elog "If the -j option is set too high, the build process may fail."
+	elog "If the MAKEOPTS -j option is set too high, the build process may fail."
 }
