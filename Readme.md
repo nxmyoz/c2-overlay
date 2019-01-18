@@ -33,7 +33,7 @@ layman -f -a ODROID-C2
 The most important stuff:
 
 ```bash
-CFLAGS="-O2 -pipe  -march=armv8-a+crc+fp+simd -mabi=lp64 -mcpu=cortex-a53+crc+fp+simd"
+CFLAGS="-O2 -pipe -march=armv8-a+crc+fp+simd -mabi=lp64 -mcpu=cortex-a53+crc+fp+simd -ftree-vectorize --param l1-cache-size=16 --param l1-cache-line-size=64 --param l2-cache-size=512"
 CXXFLAGS="${CFLAGS}"
 CHOST="aarch64-unknown-linux-gnu"
 MAKEOPTS="-j4"
