@@ -52,7 +52,7 @@ src_install() {
 		newins u-boot.bin u-boot-${PV}.bin
 	fi
 
-	dodoc board/amlogic/p200/README.odroid-c2
+	dodoc doc/board/amlogic/odroid-c2.rst
 }
 
 pkg_postinst() {
